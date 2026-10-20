@@ -11,13 +11,6 @@ g++ -std=c++11 -Wall -Wextra src/main.cpp -o lostfound
 ./lostfound
 ```
 
-Dengan CMake:
-
-```bash
-cmake -S . -B build
-cmake --build build
-./build/lostfound
-```
 
 Pilih `3` pada menu tamu untuk keluar. Setelah TODO diisi, jalankan ulang skenario di `tests/manual_tests.md`.
 
@@ -38,7 +31,7 @@ Pilih `3` pada menu tamu untuk keluar. Setelah TODO diisi, jalankan ulang skenar
 11. `ui/item_screen.cpp`
 12. `ui/claim_screen.cpp`
 
-Jangan mengompilasi file modul sendiri dan jangan menambahkan modul itu ke `add_executable` CMake.
+Jangan mengompilasi file modul sendiri.
 
 ## Pemilik file
 
