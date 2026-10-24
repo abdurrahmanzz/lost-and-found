@@ -15,11 +15,9 @@
 // CONTOH: 0 -> 1.
 // HATI-HATI: indeks 0 valid, jadi jangan menganggapnya berarti tidak ada data.
 // SELESAI JIKA: [ ] M-ITEM-4 lulus.
-// JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-int toDisplayNo(int index) {
-    (void)index; // hapus komentar ini setelah dipakai
-    return 0;
-}
+// JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua
+// pemilik modul.
+int toDisplayNo(int index) { return index + 1; }
 
 // FUNGSI: toIndex   (flowchart: "Nomor layar" -> "-1" -> "Indeks")
 // TUJUAN: mengubah nomor layar mulai 1 kembali menjadi indeks array mulai 0.
@@ -28,8 +26,6 @@ int toDisplayNo(int index) {
 // CONTOH: 1 -> 0.
 // HATI-HATI: layar harus memastikan nomor minimal 1 sebelum hasil ini dipakai.
 // SELESAI JIKA: [ ] M-ITEM-4 lulus.
-// JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-int toIndex(int displayNo) {
-    (void)displayNo; // hapus komentar ini setelah dipakai
-    return -1;
-}
+// JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua
+// pemilik modul.
+int toIndex(int displayNo) { return displayNo - 1; }
