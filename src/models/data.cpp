@@ -18,8 +18,8 @@ const int MAX_LOGIN_ATTEMPTS = 3;
 const int MAX_CLAIM_ATTEMPTS = 3;
 const int MIN_PASSWORD_LENGTH = 6;
 
-const string STATUS_AVAILABLE = "Tersedia";
-const string STATUS_RETURNED = "Dikembalikan";
+const std::string STATUS_AVAILABLE = "Tersedia";
+const std::string STATUS_RETURNED = "Dikembalikan";
 
 const int REG_OK = 0;
 const int REG_EMPTY_FIELD = 1;
@@ -47,19 +47,19 @@ const int CLAIM_NOT_AVAILABLE = 4;
 const int CLAIM_OWN_ITEM = 5;
 const int CLAIM_STORAGE_FULL = 6;
 
-string userName[MAX_USERS], userPassword[MAX_USERS], userPhone[MAX_USERS];
+std::string userName[MAX_USERS], userPassword[MAX_USERS], userPhone[MAX_USERS];
 int userFailed[MAX_USERS];
 bool userLocked[MAX_USERS];
 int userCount = 0;
 
 int foundReporter[MAX_FOUND];
-string foundName[MAX_FOUND], foundCategory[MAX_FOUND], foundLocation[MAX_FOUND],
-    foundDate[MAX_FOUND], foundDescription[MAX_FOUND], foundSecret[MAX_FOUND],
-    foundStatus[MAX_FOUND];
+std::string foundName[MAX_FOUND], foundCategory[MAX_FOUND],
+    foundLocation[MAX_FOUND], foundDate[MAX_FOUND], foundDescription[MAX_FOUND],
+    foundSecret[MAX_FOUND], foundStatus[MAX_FOUND];
 int foundCount = 0;
 
 int lostReporter[MAX_LOST];
-string lostName[MAX_LOST], lostCategory[MAX_LOST], lostLocation[MAX_LOST],
+std::string lostName[MAX_LOST], lostCategory[MAX_LOST], lostLocation[MAX_LOST],
     lostDate[MAX_LOST], lostDescription[MAX_LOST];
 int lostCount = 0;
 
