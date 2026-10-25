@@ -38,13 +38,13 @@ int findUserByUsername(std::string username) {
 // array") TUJUAN: memvalidasi lalu menambahkan satu pengguna baru ke array
 // paralel.
 // TODO:
-//  [ ] 1. Jika username, password, atau phone kosong -> return REG_EMPTY_FIELD.
-//  [ ] 2. Jika username mengandung spasi -> return REG_USERNAME_HAS_SPACE.
-//  [ ] 3. Jika findUserByUsername(username) bukan -1 -> return REG_DUPLICATE.
-//  [ ] 4. Jika panjang password kurang dari MIN_PASSWORD_LENGTH -> return
-//  REG_PASSWORD_SHORT. [ ] 5. Jika isAllDigits(phone) false -> return
-//  REG_PHONE_INVALID. [ ] 6. Jika userCount sudah MAX_USERS -> return REG_FULL.
-//  [ ] 7. Isi userName, userPassword, userPhone pada indeks userCount;
+//  [*] 1. Jika username, password, atau phone kosong -> return REG_EMPTY_FIELD.
+//  [*] 2. Jika username mengandung spasi -> return REG_USERNAME_HAS_SPACE.
+//  [*] 3. Jika findUserByUsername(username) bukan -1 -> return REG_DUPLICATE.
+//  [*] 4. Jika panjang password kurang dari MIN_PASSWORD_LENGTH -> return
+//  REG_PASSWORD_SHORT. [*] 5. Jika isAllDigits(phone) false -> return
+//  REG_PHONE_INVALID. [*] 6. Jika userCount sudah MAX_USERS -> return REG_FULL.
+//  [*] ] 7. Isi userName, userPassword, userPhone pada indeks userCount;
 //  userFailed=0 dan userLocked=false; lalu userCount++ dan return REG_OK.
 // CONTOH: "andi", "rahasia", "08123" -> REG_OK lalu userCount bertambah satu.
 // HATI-HATI: cek urutan ini persis agar layar menampilkan pesan yang konsisten;
@@ -64,12 +64,25 @@ int registerUser(std::string username, std::string password,
 
   if (findUserByUsername(username) != -1)
     return REG_DUPLICATE;
+
   if (password.length() < MIN_PASSWORD_LENGTH)
     return REG_PASSWORD_SHORT;
+
   if (isAllDigits(phone) == false)
     return REG_PHONE_INVALID;
 
-  return REG_FULL;
+  if (userCount >= MAX_USERS)
+    return REG_FULL;
+
+  userName[userCount] = username;
+  userPassword[userCount] = password;
+  userPhone[userCount] = phone;
+  userFailed[userCount] = 0;
+  userLocked[userCount] = false;
+
+  userCount++;
+
+  return REG_OK;
 }
 
 // FUNGSI: loginUser   (flowchart: "Input login" -> "Valid?" -> "Gagal 3x?")
