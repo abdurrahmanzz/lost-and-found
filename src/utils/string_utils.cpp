@@ -30,8 +30,8 @@ std::string trim(std::string s) {
     left++;
   }
 
-  while (left < right && s[left - 1] == ' ') {
-    left--;
+  while (right > left && s[right - 1] == ' ') {
+    right--;
   }
 
   return s.substr(left, right - left);
@@ -68,8 +68,8 @@ std::string toLower(std::string s) {
 // atau dipakai pencarian layar. SELESAI JIKA: [ ] M-ITEM-4 lulus. JANGAN ubah
 // nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 bool containsIgnoreCase(std::string text, std::string keyword) {
-  toLower(text);
-  toLower(keyword);
+  text = toLower(text);
+  keyword = toLower(keyword);
 
   if (keyword == "") {
     return true;
@@ -167,7 +167,7 @@ int splitLine(std::string line, char delimiter, std::string parts[],
 
       part = "";
     } else {
-      part = line[i];
+      part += line[i];
     }
   }
 
