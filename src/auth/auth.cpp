@@ -56,7 +56,8 @@ int registerUser(std::string username, std::string password,
   if (username == "" || password == "" || phone == "")
     return REG_EMPTY_FIELD;
 
-  for (int i = 0; i < username.length(); i++) {
+  int length = username.length();
+  for (int i = 0; i < length; i++) {
     if (username[i] == ' ') {
       return REG_USERNAME_HAS_SPACE;
     }
