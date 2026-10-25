@@ -1,3 +1,6 @@
+#include <cctype>
+#include <string>
+
 /*
  * FILE:         src/auth/auth.cpp
  * PEMILIK:      Anggota B
@@ -19,12 +22,11 @@
 // HATI-HATI: indeks 0 adalah hasil valid; jangan memakai if(hasil) untuk
 // menentukan ada atau tidak. SELESAI JIKA: [ ] M-AUTH-1 lulus. JANGAN ubah
 // nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-#include <cctype>
-int findUserByUsername(string username) {
-  username = tolower(username);
+int findUserByUsername(std::string username) {
+  username = toLower(username);
 
   for (int i = 0; i < userCount; i++) {
-    if (toLower(username[i]) == username) {
+    if (toLower(userName[i]) == username) {
       return i;
     }
   }
@@ -49,11 +51,17 @@ int findUserByUsername(string username) {
 // jangan cout atau saveAll di modul logika. SELESAI JIKA: [ ] M-AUTH-1 dan
 // M-AUTH-2 lulus. JANGAN ubah nama, parameter, atau tipe return fungsi ini
 // tanpa lapor semua pemilik modul.
-int registerUser(string username, string password, string phone) {
+int registerUser(std::string username, std::string password,
+                 std::string phone) {
   if (username == "" || password == "" || phone == "")
     return REG_EMPTY_FIELD;
-  if (isspace(username))
-    return REG_USERNAME_HAS_SPACE;
+
+  for (int i = 0; i < username.length(); i++) {
+    if (username[i] == ' ') {
+      return REG_USERNAME_HAS_SPACE;
+    }
+  }
+
   if (findUserByUsername(username) != -1)
     return REG_DUPLICATE;
   if (password.length() < MIN_PASSWORD_LENGTH)
@@ -61,9 +69,6 @@ int registerUser(string username, string password, string phone) {
   if (isAllDigits(phone) == false)
     return REG_PHONE_INVALID;
 
-  (void)username; // hapus komentar ini setelah dipakai
-  (void)password; // hapus komentar ini setelah dipakai
-  (void)phone;    // hapus komentar ini setelah dipakai
   return REG_FULL;
 }
 
@@ -83,8 +88,27 @@ int registerUser(string username, string password, string phone) {
 // dengan >= 0. Dilarang cout di sini. SELESAI JIKA: [ ] M-AUTH-3 dan M-AUTH-4
 // lulus. JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor
 // semua pemilik modul.
-int loginUser(string username, string password) {
-  (void)username; // hapus komentar ini setelah dipakai
-  (void)password; // hapus komentar ini setelah dipakai
+int loginUser(std::string username, std::string password) {
+  int index = findUserByUsername(username);
+  if (index == -1)
+    return LOGIN_NOT_FOUND;
+
+  if (userLocked[index] == true)
+    return LOGIN_LOCKED;
+
+  if (userPassword[index] == password) {
+    userFailed[index] = 0;
+    return index;
+  } else {
+    userFailed[index] += 1;
+  }
+
+  if (userFailed[index] >= MAX_LOGIN_ATTEMPTS) {
+    userLocked[index] = true;
+    return LOGIN_LOCKED;
+  } else {
+    return LOGIN_WRONG_PASSWORD;
+  }
+
   return LOGIN_NOT_FOUND;
 }
