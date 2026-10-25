@@ -48,7 +48,8 @@ std::string trim(std::string s) {
 // membandingkan. SELESAI JIKA: [ ] M-AUTH-1 lulus. JANGAN ubah nama, parameter,
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 std::string toLower(std::string s) {
-  for (int i = 0; i < s.length(); i++) {
+  int length = s.length();
+  for (int i = 0; i < length; i++) {
     s[i] = tolower(s[i]);
   }
 
@@ -75,10 +76,12 @@ bool containsIgnoreCase(std::string text, std::string keyword) {
     return true;
   }
 
-  for (int i = 0; i + keyword.length() <= text.length(); i++) {
+  int keywordLength = keyword.length();
+  int textLength = text.length();
+  for (int i = 0; i + keywordLength <= textLength; i++) {
     bool match = true;
 
-    for (int j = 0; j < keyword.length(); j++) {
+    for (int j = 0; j < keywordLength; j++) {
       if (text[i + j] != keyword[j]) {
         match = false;
         break;
@@ -104,7 +107,8 @@ bool containsIgnoreCase(std::string text, std::string keyword) {
 // atau indeks. SELESAI JIKA: [ ] M-STORAGE-1 lulus. JANGAN ubah nama,
 // parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 std::string sanitizeField(std::string s) {
-  for (int i = 0; i < s.length(); i++) {
+  int length = s.length();
+  for (int i = 0; i < length; i++) {
     if (s[i] == '|' || s[i] == '\n' || s[i] == '\r') {
       s[i] = '/';
     }
@@ -129,7 +133,8 @@ bool isAllDigits(std::string s) {
     return false;
   }
 
-  for (int i = 0; i < s.length(); i++) {
+  int length = s.length();
+  for (int i = 0; i < length; i++) {
     bool isDigit = isdigit(s[i]);
 
     if (!isDigit) {
@@ -158,7 +163,8 @@ int splitLine(std::string line, char delimiter, std::string parts[],
   std::string part = "";
   int amount = 0;
 
-  for (int i = 0; i < line.length(); i++) {
+  int length = line.length();
+  for (int i = 0; i < length; i++) {
     if (line[i] == delimiter) {
       if (amount < maxParts) {
         parts[amount] = part;
