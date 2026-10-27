@@ -49,3 +49,4 @@ Semua kode ada dalam satu file: `src/main.cpp`. Setiap pemilik bekerja hanya pad
 Baca `docs/data-model.md` sebelum mengubah array dan `docs/TASKS.md` sebelum mulai mengisi TODO.
 
 azhri hytam
+mudho
