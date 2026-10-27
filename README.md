@@ -60,3 +60,5 @@ Jangan mengompilasi file modul sendiri.
 - Tidak ada admin dan tidak ada penghapusan data pada MVP; indeks array tidak bergeser.
 
 Baca `docs/data-model.md` sebelum mengubah array dan `docs/TASKS.md` sebelum mulai mengisi TODO.
+
+abcdefgh
