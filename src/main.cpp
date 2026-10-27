@@ -92,9 +92,9 @@ int searchResultCount = 0;
 // TUJUAN: menyediakan dua pengguna dan dua barang temuan agar program dapat
 // dicoba tanpa registrasi.
 // TODO:
-//  [ ] 1. Hanya isi data ini saat userCount, foundCount, dan lostCount masih 0.
-//  [ ] 2. Isi dua pengguna pada indeks 0 dan 1, termasuk password, nomor,
-//  gagal=0, dan locked=false. [ ] 3. Isi dua barang temuan pada indeks 0 dan 1;
+//  [*] 1. Hanya isi data ini saat userCount, foundCount, dan lostCount masih 0.
+//  [*] 2. Isi dua pengguna pada indeks 0 dan 1, termasuk password, nomor,
+//  gagal=0, dan locked=false. [*] 3. Isi dua barang temuan pada indeks 0 dan 1;
 //  reporter harus menunjuk indeks pengguna yang valid. [ ] 4. Isi semua array
 //  pasangan untuk setiap barang, beri STATUS_AVAILABLE, lalu atur userCount dan
 //  foundCount.
@@ -104,7 +104,41 @@ int searchResultCount = 0;
 // lulus. JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor
 // semua pemilik modul.
 void loadDemoData() {
-  // Kerangka sengaja kosong. Isi bersama pemilik data setelah kontrak dipahami.
+    if (userCount == 0 && foundCount == 0 && lostCount == 0) {
+        
+        userName[0] = "Azhri";
+        userPassword[0] = "Azhri123"; 
+        userPhone[0] = "081234567890";
+        userFailed[0] = 0;
+        userLocked[0] = false;
+
+        userName[1] = "Arya";
+        userPassword[1] = "Arya123";
+        userPhone[1] = "089876543210";
+        userFailed[1] = 0;
+        userLocked[1] = false;
+
+        foundReporter[0] = 0;
+        foundName[0] = "Payung Hitam";
+        foundCategory[0] = "Aksesori";
+        foundLocation[0] = "Kantin Utama";
+        foundDate[0] = "2026-10-25";
+        foundDescription[0] = "Payung lipat warna hitam merk standar";
+        foundSecret[0] = "Ada stiker kecil bergambar bintang di pegangannya";
+        foundStatus[0] = STATUS_AVAILABLE;
+
+        foundReporter[1] = 1;
+        foundName[1] = "Dompet Kulit Coklat";
+        foundCategory[1] = "Dompet";
+        foundLocation[1] = "Parkiran Fakultas";
+        foundDate[1] = "2026-10-26";
+        foundDescription[1] = "Dompet berisi kartu identitas dan beberapa kartu penting";
+        foundSecret[1] = "Ada foto pelajar di dalam selipan kartu";
+        foundStatus[1] = STATUS_AVAILABLE;
+
+        userCount = 2;
+        foundCount = 2;
+    }
 }
 
 // ============ [PEMILIK A] string_utils ============
