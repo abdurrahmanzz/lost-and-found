@@ -1059,6 +1059,7 @@ void showClaimFlowScreen(int userIndex) {
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 int main() {
   cout << "awokawok"<<endl;
+  cout << "Hai"<<endl;
     loadAll();
     if (userCount == 0) {
         loadDemoData();
