@@ -1,5 +1,9 @@
 # Pembagian Tugas Tim
 
+## Struktur satu file
+
+Semua kode ada di `src/main.cpp`. Setiap anggota hanya mengedit bagian miliknya yang ditandai banner; library dan `using namespace std;` hanya ada sekali di bagian paling atas. Jangan memformat ulang seluruh file saat mengerjakan satu bagian.
+
 ## Urutan lintas anggota
 
 Kerjakan fondasi dulu agar modul lain tidak perlu menebak fungsi yang belum ada:
@@ -11,16 +15,16 @@ Kerjakan fondasi dulu agar modul lain tidak perlu menebak fungsi yang belum ada:
 5. **A:** `storage/storage.cpp` paling akhir karena bergantung pada seluruh format data.
 6. **D:** `claims/claims.cpp`, lalu layar item/klaim dan pengecekan integrasi `main.cpp` bersama pemilik terkait.
 
-Sebelum memulai, tarik perubahan terbaru dan baca TODO pada fungsi yang dikerjakan. Jangan mengubah kontrak fungsi tanpa memberi tahu semua pemilik modul.
+Sebelum memulai, jalankan `git pull --rebase` dan baca TODO pada fungsi yang dikerjakan. Jangan mengubah kontrak fungsi tanpa memberi tahu semua pemilik bagian.
 
 ## Anggota A
 
-### File
+### Bagian
 
-- [ ] `src/utils/string_utils.cpp`
-- [ ] `src/utils/id_utils.cpp`
-- [ ] `src/models/data.cpp`
-- [ ] `src/storage/storage.cpp` (opsional, terakhir)
+- [ ] string_utils
+- [ ] id_utils
+- [ ] data
+- [ ] storage (opsional, terakhir)
 
 ### Urutan kerja
 
@@ -39,10 +43,10 @@ Sebelum memulai, tarik perubahan terbaru dan baca TODO pada fungsi yang dikerjak
 
 ## Anggota B
 
-### File
+### Bagian
 
-- [ ] `src/auth/auth.cpp`
-- [ ] `src/ui/auth_screen.cpp`
+- [ ] auth
+- [ ] auth_screen
 
 ### Urutan kerja
 
@@ -60,11 +64,11 @@ Sebelum memulai, tarik perubahan terbaru dan baca TODO pada fungsi yang dikerjak
 
 ## Anggota C
 
-### File
+### Bagian
 
-- [ ] `src/utils/date_utils.cpp`
-- [ ] `src/items/items.cpp`
-- [ ] `src/ui/item_screen.cpp`
+- [ ] date_utils
+- [ ] items
+- [ ] item_screen
 
 ### Urutan kerja
 
@@ -82,12 +86,12 @@ Sebelum memulai, tarik perubahan terbaru dan baca TODO pada fungsi yang dikerjak
 
 ## Anggota D
 
-### File
+### Bagian
 
-- [ ] `src/ui/input_helpers.cpp`
-- [ ] `src/claims/claims.cpp`
-- [ ] `src/ui/claim_screen.cpp`
-- [ ] `src/main.cpp`
+- [ ] input_helpers
+- [ ] claims
+- [ ] claim_screen
+- [ ] main()
 
 ### Urutan kerja
 
@@ -105,7 +109,7 @@ Sebelum memulai, tarik perubahan terbaru dan baca TODO pada fungsi yang dikerjak
 
 ## Checklist bersama sebelum PR
 
-- [ ] Hanya `src/main.cpp` memuat library dan `using namespace std;`.
+- [ ] `src/main.cpp` memuat library dan `using namespace std;` sekali di bagian paling atas.
 - [ ] Build: `g++ -std=c++11 -Wall -Wextra src/main.cpp -o lostfound`.
 - [ ] Tidak ada warning baru yang berarti.
 - [ ] Tidak ada file data pribadi di Git (`data/*.txt` diabaikan).

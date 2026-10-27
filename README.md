@@ -4,7 +4,7 @@ Kerangka proyek C++ terminal untuk tim mahasiswa semester 1. Program akan mencat
 
 ## Build dan jalankan
 
-**Patokan utama:** hanya kompilasi `src/main.cpp`. File modul lain dimasukkan oleh `main.cpp`, sehingga garis merah editor pada modul `.cpp` dapat diabaikan selama perintah berikut berhasil.
+**Patokan utama:** seluruh program berada di `src/main.cpp`; kompilasi file itu dengan perintah berikut.
 
 ```bash
 g++ -std=c++11 -Wall -Wextra src/main.cpp -o lostfound
@@ -14,46 +14,33 @@ g++ -std=c++11 -Wall -Wextra src/main.cpp -o lostfound
 
 Pilih `3` pada menu tamu untuk keluar. Setelah TODO diisi, jalankan ulang skenario di `tests/manual_tests.md`.
 
-## Susunan proyek
+## Struktur kode
 
-`src/main.cpp` adalah satu-satunya file yang memuat library dan `using namespace std;`. Ia memasukkan modul dalam urutan ini:
+Semua kode ada dalam satu file: `src/main.cpp`. Setiap pemilik bekerja hanya pada bagian yang diberi banner namanya; library dan `using namespace std;` hanya ada sekali di bagian paling atas.
 
-1. `models/data.cpp`
-2. `utils/string_utils.cpp`
-3. `utils/date_utils.cpp`
-4. `utils/id_utils.cpp`
-5. `ui/input_helpers.cpp`
-6. `storage/storage.cpp`
-7. `auth/auth.cpp`
-8. `items/items.cpp`
-9. `claims/claims.cpp`
-10. `ui/auth_screen.cpp`
-11. `ui/item_screen.cpp`
-12. `ui/claim_screen.cpp`
+## Kepemilikan bagian
 
-Jangan mengompilasi file modul sendiri.
-
-## Pemilik file
-
-| Anggota | File |
+| Anggota | Bagian |
 | --- | --- |
-| A | `src/models/data.cpp`, `src/utils/string_utils.cpp`, `src/utils/id_utils.cpp`, `src/storage/storage.cpp` |
-| B | `src/auth/auth.cpp`, `src/ui/auth_screen.cpp` |
-| C | `src/items/items.cpp`, `src/ui/item_screen.cpp`, `src/utils/date_utils.cpp` |
-| D | `src/claims/claims.cpp`, `src/ui/claim_screen.cpp`, `src/ui/input_helpers.cpp`, `src/main.cpp` |
+| A | data, string_utils, id_utils, storage |
+| B | auth, auth_screen |
+| C | date_utils, items, item_screen |
+| D | input_helpers, claims, claim_screen, main() |
 
 ## Aturan Git
 
-1. Buat satu branch per fitur, misalnya `feature/auth-register`.
-2. Ubah file pemilik sendiri; jika harus mengubah file anggota lain, beri tahu pemiliknya lebih dahulu.
-3. Buka Pull Request (PR) untuk pekerjaan yang siap diuji.
-4. Review silang berputar: **A → B → C → D → A**.
-5. Jangan merge langsung ke branch utama tanpa review.
+1. Jalankan `git pull --rebase` sebelum mulai bekerja.
+2. Buat satu branch per fitur, misalnya `feature/auth-register`.
+3. Hanya edit bagian milik sendiri; jika harus mengubah bagian anggota lain, beri tahu pemiliknya lebih dahulu.
+4. Jangan memformat ulang seluruh `src/main.cpp`.
+5. Buka PR kecil untuk pekerjaan yang siap diuji.
+6. Review silang berputar: **A → B → C → D → A**.
+7. Jangan merge langsung ke branch utama tanpa review.
 
 ## Disederhanakan dengan sengaja
 
 - Fase 1 **tidak memakai** `.h`, `struct`, `vector`, class, pointer, referensi, atau template. Semua data ada pada array paralel global.
-- `main.cpp` memasukkan file `.cpp`; ini penyederhanaan sementara. Pada fase 2 proyek akan dirapikan memakai `.h`, `struct`, dan `vector`.
+- Semua bagian sengaja digabung dalam satu `main.cpp`; banner kepemilikan menjaga pembagian kerja tetap jelas.
 - Password disimpan polos (apa adanya). Ini tidak aman untuk aplikasi nyata dan hanya boleh untuk latihan.
 - Akun yang terkunci tidak memiliki jalur buka dari menu; satu-satunya cara saat ini adalah mengedit data.
 - Penyimpanan file `data/*.txt` bersifat opsional. Stub `loadAll`/`saveAll` aman bila belum diisi.
