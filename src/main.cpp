@@ -170,7 +170,7 @@ std::string toLower(std::string s) {
 //  [*] 1. Ubah text dan keyword memakai toLower.
 //  [*] 2. Jika keyword kosong, return true agar filter kosong diabaikan.
 //  [*] 3. Loop posisi text dan cek apakah bagian text cocok seluruhnya dengan
-//  keyword. [ ] 4. Return true saat cocok, atau false setelah semua posisi
+//  keyword. [*] 4. Return true saat cocok, atau false setelah semua posisi
 //  diperiksa.
 // CONTOH: "Tas Biru", "biru" -> true.
 // HATI-HATI: jangan mencari foundSecret; detail rahasia tidak boleh ditampilkan
@@ -256,10 +256,10 @@ bool isAllDigits(std::string s) {
 // FUNGSI: splitLine   (flowchart: "Baris" -> "Field-field")
 // TUJUAN: memecah satu baris file ke array parts untuk modul storage.
 // TODO:
-//  [ ] 1. Siapkan string bagian dan jumlah=0.
-//  [ ] 2. Loop karakter line; saat delimiter ditemukan, simpan bagian bila
-//  jumlah masih kurang dari maxParts. [ ] 3. Kosongkan bagian dan lanjutkan;
-//  sesudah loop simpan bagian terakhir termasuk bila kosong. [ ] 4. Return
+//  [*] 1. Siapkan string bagian dan jumlah=0.
+//  [*] 2. Loop karakter line; saat delimiter ditemukan, simpan bagian bila
+//  jumlah masih kurang dari maxParts. [*] 3. Kosongkan bagian dan lanjutkan;
+//  sesudah loop simpan bagian terakhir termasuk bila kosong. [*] 4. Return
 //  jumlah bagian yang benar-benar disimpan.
 // CONTOH: "1|andi|08", '|', parts, 4 -> 3 dan parts berisi "1", "andi", "08".
 // HATI-HATI: jangan menulis melewati parts[maxParts-1]; field terakhir kosong
@@ -340,11 +340,11 @@ int daysInMonth(int month, int year) {
 // FUNGSI: isValidDate   (flowchart: "Tanggal" -> "Format?" -> "Bulan/hari?")
 // TUJUAN: memeriksa format YYYY-MM-DD dan batas hari tiap bulan.
 // TODO:
-//  [ ] 1. Cek panjang tepat 10 dan karakter ke-4 serta ke-7 adalah '-'.
-//  [ ] 2. Pastikan delapan posisi angka lainnya adalah digit.
-//  [ ] 3. Ubah digit tahun, bulan, dan hari ke int secara manual.
-//  [ ] 4. Tolak bulan di luar 1..12; tentukan jumlah hari bulan itu dengan
-//  if/else. [ ] 5. Februari boleh memakai aturan kabisat atau cukup 28 hari
+//  [*] 1. Cek panjang tepat 10 dan karakter ke-4 serta ke-7 adalah '-'.
+//  [*] 2. Pastikan delapan posisi angka lainnya adalah digit.
+//  [*] 3. Ubah digit tahun, bulan, dan hari ke int secara manual.
+//  [*] 4. Tolak bulan di luar 1..12; tentukan jumlah hari bulan itu dengan
+//  if/else. [*] 5. Februari boleh memakai aturan kabisat atau cukup 28 hari
 //  untuk versi awal; return apakah hari valid.
 // CONTOH: "2025-02-30" -> false; "2025-02-28" -> true.
 // HATI-HATI: tanggal yang bentuknya benar belum tentu ada di kalender.
@@ -392,7 +392,7 @@ bool isValidDate(std::string date) {
 // TUJUAN: mengembalikan tanggal lokal hari ini dengan format yang sama seperti
 // input laporan.
 // TODO:
-//  [ ] 1. Bagian ini sudah jadi; jangan diubah saat mengerjakan validasi
+//  [*] 1. Bagian ini sudah jadi; jangan diubah saat mengerjakan validasi
 //  tanggal.
 // CONTOH: pada 2025-08-17 -> "2025-08-17".
 // HATI-HATI: hasil mengikuti jam komputer, bukan tanggal dari internet.
@@ -411,10 +411,10 @@ std::string getTodayDate() {
 // FUNGSI: isFutureDate   (flowchart: "Tanggal valid?" -> "Bandingkan hari ini")
 // TUJUAN: menentukan apakah tanggal laporan lebih besar dari tanggal hari ini.
 // TODO:
-//  [ ] 1. Jika isValidDate(date) false, return false; validasi utama tetap
-//  dilakukan add item. [ ] 2. Ambil today dengan getTodayDate(). [ ] 3.
+//  [*] 1. Jika isValidDate(date) false, return false; validasi utama tetap
+//  dilakukan add item. [*] 2. Ambil today dengan getTodayDate(). [*] 3.
 //  Bandingkan date > today karena dua string YYYY-MM-DD sama panjang dan
-//  berurutan tahun-bulan-hari. [ ] 4. Return hasil perbandingan.
+//  berurutan tahun-bulan-hari. [*] 4. Return hasil perbandingan.
 // CONTOH: jika hari ini "2025-08-17", "2025-08-18" -> true.
 // HATI-HATI: perbandingan teks ini hanya aman jika format selalu YYYY-MM-DD
 // lengkap dengan nol di depan. SELESAI JIKA: [ ] M-ITEM-3 lulus. JANGAN ubah
@@ -443,7 +443,7 @@ bool isFutureDate(std::string date) {
 // FUNGSI: toDisplayNo   (flowchart: "Indeks" -> "+1" -> "Nomor layar")
 // TUJUAN: mengubah indeks mulai 0 menjadi nomor yang ramah pengguna mulai 1.
 // TODO:
-//  [ ] 1. Return index + 1.
+//  [*] 1. Return index + 1.
 // CONTOH: 0 -> 1.
 // HATI-HATI: indeks 0 valid, jadi jangan menganggapnya berarti tidak ada data.
 // SELESAI JIKA: [ ] M-ITEM-4 lulus.
@@ -454,7 +454,7 @@ int toDisplayNo(int index) { return index + 1; }
 // FUNGSI: toIndex   (flowchart: "Nomor layar" -> "-1" -> "Indeks")
 // TUJUAN: mengubah nomor layar mulai 1 kembali menjadi indeks array mulai 0.
 // TODO:
-//  [ ] 1. Return displayNo - 1.
+//  [*] 1. Return displayNo - 1.
 // CONTOH: 1 -> 0.
 // HATI-HATI: layar harus memastikan nomor minimal 1 sebelum hasil ini dipakai.
 // SELESAI JIKA: [ ] M-ITEM-4 lulus.
@@ -476,9 +476,9 @@ int toIndex(int displayNo) { return displayNo - 1; }
 // FUNGSI: readLine   (flowchart: "Prompt" -> "getline" -> "Teks")
 // TUJUAN: menampilkan prompt lalu membaca satu baris lengkap, termasuk spasi.
 // TODO:
-//  [ ] 1. Tampilkan prompt dengan cout.
-//  [ ] 2. Buat string hasil dan baca memakai getline(cin, hasil).
-//  [ ] 3. Return hasil.
+//  [*] 1. Tampilkan prompt dengan cout.
+//  [*] 2. Buat string hasil dan baca memakai getline(cin, hasil).
+//  [*] 3. Return hasil.
 // CONTOH: prompt "Nama: ", input "Tas Biru" -> "Tas Biru".
 // HATI-HATI: jangan pakai cin >> karena nama dan deskripsi boleh memiliki
 // spasi. SELESAI JIKA: [ ] M-UI-1 lulus. JANGAN ubah nama, parameter, atau tipe
@@ -494,10 +494,10 @@ std::string readLine(std::string prompt) {
 // batas?") TUJUAN: membaca bilangan dalam batas tanpa memakai konversi yang
 // belum dipelajari.
 // TODO:
-//  [ ] 1. Panggil readLine(prompt).
-//  [ ] 2. Jika bukan isAllDigits, tampilkan pesan dan ulangi.
-//  [ ] 3. Ubah tiap digit: hasil = hasil * 10 + (huruf - '0').
-//  [ ] 4. Jika hasil di luar minValue..maxValue, tampilkan pesan dan ulangi;
+//  [*] 1. Panggil readLine(prompt).
+//  [*] 2. Jika bukan isAllDigits, tampilkan pesan dan ulangi.
+//  [*] 3. Ubah tiap digit: hasil = hasil * 10 + (huruf - '0').
+//  [*] 4. Jika hasil di luar minValue..maxValue, tampilkan pesan dan ulangi;
 //  jika valid return hasil.
 // CONTOH: input "2" dengan batas 1..3 -> 2; input "dua" -> diminta ulang.
 // HATI-HATI: selalu baca lewat readLine supaya tidak ada sisa newline untuk
@@ -525,8 +525,8 @@ int readInt(std::string prompt, int minValue, int maxValue) {
 // FUNGSI: pauseScreen   (flowchart: "Tampil pesan" -> "Enter" -> "Lanjut")
 // TUJUAN: memberi pengguna waktu membaca hasil sebelum kembali ke menu.
 // TODO:
-//  [ ] 1. Tampilkan pesan singkat.
-//  [ ] 2. Panggil readLine dengan prompt kosong agar pengguna menekan Enter.
+//  [*] 1. Tampilkan pesan singkat.
+//  [*] 2. Panggil readLine dengan prompt kosong agar pengguna menekan Enter.
 // CONTOH: setelah pesan berhasil, Enter kembali ke menu.
 // HATI-HATI: pakai readLine agar tidak terkena sisa newline dari cin >>.
 // SELESAI JIKA: [ ] M-UI-1 lulus.
@@ -537,9 +537,9 @@ void pauseScreen() { readLine("Tekan Enter untuk lanjut..."); }
 // FUNGSI: printHeader   (flowchart: "Judul" -> "Garis" -> "Judul")
 // TUJUAN: membuat judul layar konsisten pada setiap menu.
 // TODO:
-//  [ ] 1. Tampilkan garis pemisah.
-//  [ ] 2. Tampilkan title.
-//  [ ] 3. Tampilkan garis pemisah lagi.
+//  [*] 1. Tampilkan garis pemisah.
+//  [*] 2. Tampilkan title.
+//  [*] 3. Tampilkan garis pemisah lagi.
 // CONTOH: "Menu Pengguna" tampil di antara dua garis.
 // HATI-HATI: hanya file dalam folder ui yang boleh memakai cout.
 // SELESAI JIKA: [ ] M-UI-1 lulus.
@@ -610,10 +610,10 @@ void saveAll() {
 // "Indeks/-1") TUJUAN: mencari indeks pengguna dengan username tanpa membedakan
 // huruf besar/kecil.
 // TODO:
-//  [ ] 1. Ubah username masukan menjadi huruf kecil dengan toLower.
-//  [ ] 2. Loop i dari 0 sampai kurang dari userCount.
-//  [ ] 3. Bandingkan toLower(userName[i]) dengan username masukan; jika sama
-//  return i. [ ] 4. Return -1 jika loop selesai tanpa cocok.
+//  [*] 1. Ubah username masukan menjadi huruf kecil dengan toLower.
+//  [*] 2. Loop i dari 0 sampai kurang dari userCount.
+//  [*] 3. Bandingkan toLower(userName[i]) dengan username masukan; jika sama
+//  return i. [*] 4. Return -1 jika loop selesai tanpa cocok.
 // CONTOH: data "Andi", input "andi" -> 0.
 // HATI-HATI: indeks 0 adalah hasil valid; jangan memakai if(hasil) untuk
 // menentukan ada atau tidak. SELESAI JIKA: [ ] M-AUTH-1 lulus. JANGAN ubah
@@ -685,10 +685,10 @@ int registerUser(std::string username, std::string password,
 // FUNGSI: loginUser   (flowchart: "Input login" -> "Valid?" -> "Gagal 3x?")
 // TUJUAN: memeriksa username+password dan mengunci akun setelah 3x salah.
 // TODO:
-//  [ ] 1. Panggil findUserByUsername(username). Hasil -1 -> return
-//  LOGIN_NOT_FOUND. [ ] 2. Jika userLocked[index] bernilai true -> return
-//  LOGIN_LOCKED (jangan cek password). [ ] 3. Jika userPassword[index] sama
-//  dengan password: userFailed[index] = 0, lalu return index. [ ] 4. Jika beda:
+//  [*] 1. Panggil findUserByUsername(username). Hasil -1 -> return
+//  LOGIN_NOT_FOUND. [*] 2. Jika userLocked[index] bernilai true -> return
+//  LOGIN_LOCKED (jangan cek password). [*] 3. Jika userPassword[index] sama
+//  dengan password: userFailed[index] = 0, lalu return index. [*] 4. Jika beda:
 //  userFailed[index] bertambah 1. Jika sudah >= MAX_LOGIN_ATTEMPTS:
 //  userLocked[index] = true, return LOGIN_LOCKED. Jika belum: return
 //  LOGIN_WRONG_PASSWORD.
@@ -1048,11 +1048,11 @@ void showClaimFlowScreen(int userIndex) {
 // FUNGSI: main   (flowchart: "Mulai" -> "loadAll" -> "Menu tamu/pengguna" -> "Keluar")
 // TUJUAN: memulai data, mengarahkan layar, dan menjaga menu berjalan sampai pengguna keluar.
 // TODO:
-//  [ ] 1. Panggil loadAll; jika userCount 0, panggil loadDemoData agar contoh dapat dipakai.
-//  [ ] 2. Ulangi menu tamu: Register, Login, Keluar; ambil pilihan dengan readInt.
-//  [ ] 3. Saat Login berhasil (hasil >= 0), ulangi menu pengguna: Lapor temuan, Klaim barang, Laporan saya, Logout.
+//  [*] 1. Panggil loadAll; jika userCount 0, panggil loadDemoData agar contoh dapat dipakai.
+//  [*] 2. Ulangi menu tamu: Register, Login, Keluar; ambil pilihan dengan readInt.
+//  [*] 3. Saat Login berhasil (hasil >= 0), ulangi menu pengguna: Lapor temuan, Klaim barang, Laporan saya, Logout.
 //  [ ] 4. Panggil fungsi layar sesuai pilihan; layar yang sukses mengubah data bertugas memanggil saveAll.
-//  [ ] 5. Saat Logout kembali ke menu tamu; saat Keluar hentikan loop dan return 0.
+//  [*] 5. Saat Logout kembali ke menu tamu; saat Keluar hentikan loop dan return 0.
 // CONTOH: pilih 3 di menu tamu -> program berhenti normal.
 // HATI-HATI: indeks 0 adalah login sukses; main tidak boleh berisi logika bisnis atau memakai cin/cout langsung.
 // SELESAI JIKA: [ ] M-UI-1 lulus.
