@@ -1058,6 +1058,7 @@ void showClaimFlowScreen(int userIndex) {
 // SELESAI JIKA: [ ] M-UI-1 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 int main() {
+  cout << "awokawok"<<endl;
     loadAll();
     if (userCount == 0) {
         loadDemoData();
