@@ -28,7 +28,6 @@ using namespace std;
  * KONSEP YANG DIPERLUKAN: array, string, int, bool
  */
 
-
 const int MAX_USERS = 100;
 const int MAX_FOUND = 200;
 const int MAX_LOST = 200;
@@ -104,42 +103,44 @@ int searchResultCount = 0;
 // menaikkan count sebelum semua pasangan terisi. SELESAI JIKA: [ ] M-UI-1
 // lulus. JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor
 // semua pemilik modul.
-void loadDemoData() {
-    if (userCount == 0 && foundCount == 0 && lostCount == 0) {
-        
-        userName[0] = "Azhri";
-        userPassword[0] = "Azhri123"; 
-        userPhone[0] = "081234567890";
-        userFailed[0] = 0;
-        userLocked[0] = false;
+void loadDemoData()
+{
+  if (userCount == 0 && foundCount == 0 && lostCount == 0)
+  {
 
-        userName[1] = "Arya";
-        userPassword[1] = "Arya123";
-        userPhone[1] = "089876543210";
-        userFailed[1] = 0;
-        userLocked[1] = false;
+    userName[0] = "Azhri";
+    userPassword[0] = "Azhri123";
+    userPhone[0] = "081234567890";
+    userFailed[0] = 0;
+    userLocked[0] = false;
 
-        foundReporter[0] = 0;
-        foundName[0] = "Payung Hitam";
-        foundCategory[0] = "Aksesori";
-        foundLocation[0] = "Kantin Utama";
-        foundDate[0] = "2026-10-25";
-        foundDescription[0] = "Payung lipat warna hitam merk standar";
-        foundSecret[0] = "Ada stiker kecil bergambar bintang di pegangannya";
-        foundStatus[0] = STATUS_AVAILABLE;
+    userName[1] = "Arya";
+    userPassword[1] = "Arya123";
+    userPhone[1] = "089876543210";
+    userFailed[1] = 0;
+    userLocked[1] = false;
 
-        foundReporter[1] = 1;
-        foundName[1] = "Dompet Kulit Coklat";
-        foundCategory[1] = "Dompet";
-        foundLocation[1] = "Parkiran Fakultas";
-        foundDate[1] = "2026-10-26";
-        foundDescription[1] = "Dompet berisi kartu identitas dan beberapa kartu penting";
-        foundSecret[1] = "Ada foto pelajar di dalam selipan kartu";
-        foundStatus[1] = STATUS_AVAILABLE;
+    foundReporter[0] = 0;
+    foundName[0] = "Payung Hitam";
+    foundCategory[0] = "Aksesori";
+    foundLocation[0] = "Kantin Utama";
+    foundDate[0] = "2026-10-25";
+    foundDescription[0] = "Payung lipat warna hitam merk standar";
+    foundSecret[0] = "Ada stiker kecil bergambar bintang di pegangannya";
+    foundStatus[0] = STATUS_AVAILABLE;
 
-        userCount = 2;
-        foundCount = 2;
-    }
+    foundReporter[1] = 1;
+    foundName[1] = "Dompet Kulit Coklat";
+    foundCategory[1] = "Dompet";
+    foundLocation[1] = "Parkiran Fakultas";
+    foundDate[1] = "2026-10-26";
+    foundDescription[1] = "Dompet berisi kartu identitas dan beberapa kartu penting";
+    foundSecret[1] = "Ada foto pelajar di dalam selipan kartu";
+    foundStatus[1] = STATUS_AVAILABLE;
+
+    userCount = 2;
+    foundCount = 2;
+  }
 }
 
 // ============ [PEMILIK Haris] string_utils ============
@@ -165,15 +166,18 @@ void loadDemoData() {
 // HATI-HATI: teks kosong dan indeks akhir string sering membuat pemula keluar
 // batas array. SELESAI JIKA: [ ] M-ITEM-1 lulus. JANGAN ubah nama, parameter,
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-std::string trim(std::string s) {
+std::string trim(std::string s)
+{
   int left = 0;
   int right = s.length();
 
-  while (left < right && s[left] == ' ') {
+  while (left < right && s[left] == ' ')
+  {
     left++;
   }
 
-  while (right > left && s[right - 1] == ' ') {
+  while (right > left && s[right - 1] == ' ')
+  {
     right--;
   }
 
@@ -190,9 +194,11 @@ std::string trim(std::string s) {
 // HATI-HATI: jangan mengubah data asli di array ketika hanya ingin
 // membandingkan. SELESAI JIKA: [ ] M-AUTH-1 lulus. JANGAN ubah nama, parameter,
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-std::string toLower(std::string s) {
+std::string toLower(std::string s)
+{
   int length = s.length();
-  for (int i = 0; i < length; i++) {
+  for (int i = 0; i < length; i++)
+  {
     s[i] = tolower(s[i]);
   }
 
@@ -211,27 +217,33 @@ std::string toLower(std::string s) {
 // HATI-HATI: jangan mencari foundSecret; detail rahasia tidak boleh ditampilkan
 // atau dipakai pencarian layar. SELESAI JIKA: [ ] M-ITEM-4 lulus. JANGAN ubah
 // nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-bool containsIgnoreCase(std::string text, std::string keyword) {
+bool containsIgnoreCase(std::string text, std::string keyword)
+{
   text = toLower(text);
   keyword = toLower(keyword);
 
-  if (keyword == "") {
+  if (keyword == "")
+  {
     return true;
   }
 
   int keywordLength = keyword.length();
   int textLength = text.length();
-  for (int i = 0; i + keywordLength <= textLength; i++) {
+  for (int i = 0; i + keywordLength <= textLength; i++)
+  {
     bool match = true;
 
-    for (int j = 0; j < keywordLength; j++) {
-      if (text[i + j] != keyword[j]) {
+    for (int j = 0; j < keywordLength; j++)
+    {
+      if (text[i + j] != keyword[j])
+      {
         match = false;
         break;
       }
     }
 
-    if (match) {
+    if (match)
+    {
       return true;
     }
   }
@@ -249,10 +261,13 @@ bool containsIgnoreCase(std::string text, std::string keyword) {
 // HATI-HATI: sanitasi berlaku untuk semua teks yang disimpan, bukan untuk angka
 // atau indeks. SELESAI JIKA: [ ] M-STORAGE-1 lulus. JANGAN ubah nama,
 // parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-std::string sanitizeField(std::string s) {
+std::string sanitizeField(std::string s)
+{
   int length = s.length();
-  for (int i = 0; i < length; i++) {
-    if (s[i] == '|' || s[i] == '\n' || s[i] == '\r') {
+  for (int i = 0; i < length; i++)
+  {
+    if (s[i] == '|' || s[i] == '\n' || s[i] == '\r')
+    {
       s[i] = '/';
     }
   }
@@ -271,16 +286,20 @@ std::string sanitizeField(std::string s) {
 // HATI-HATI: spasi bukan angka; jangan menerima string kosong sebagai nomor
 // telepon valid. SELESAI JIKA: [ ] M-AUTH-2 lulus. JANGAN ubah nama, parameter,
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-bool isAllDigits(std::string s) {
-  if (s == "") {
+bool isAllDigits(std::string s)
+{
+  if (s == "")
+  {
     return false;
   }
 
   int length = s.length();
-  for (int i = 0; i < length; i++) {
+  for (int i = 0; i < length; i++)
+  {
     bool isDigit = isdigit(s[i]);
 
-    if (!isDigit) {
+    if (!isDigit)
+    {
       return false;
     }
   }
@@ -302,25 +321,32 @@ bool isAllDigits(std::string s) {
 // lulus. JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor
 // semua pemilik modul.
 int splitLine(std::string line, char delimiter, std::string parts[],
-              int maxParts) {
+              int maxParts)
+{
   std::string part = "";
   int amount = 0;
 
   int length = line.length();
-  for (int i = 0; i < length; i++) {
-    if (line[i] == delimiter) {
-      if (amount < maxParts) {
+  for (int i = 0; i < length; i++)
+  {
+    if (line[i] == delimiter)
+    {
+      if (amount < maxParts)
+      {
         parts[amount] = part;
         amount++;
       }
 
       part = "";
-    } else {
+    }
+    else
+    {
       part += line[i];
     }
   }
 
-  if (amount < maxParts) {
+  if (amount < maxParts)
+  {
     parts[amount] = part;
     amount++;
   }
@@ -340,12 +366,15 @@ int splitLine(std::string line, char delimiter, std::string parts[],
  * KONSEP YANG DIPERLUKAN: string, if/else, return
  */
 
-bool isLeapYear(int year) {
+bool isLeapYear(int year)
+{
   return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
 }
 
-int daysInMonth(int month, int year) {
-  switch (month) {
+int daysInMonth(int month, int year)
+{
+  switch (month)
+  {
   case 1:
   case 3:
   case 5:
@@ -362,7 +391,8 @@ int daysInMonth(int month, int year) {
     return 30;
 
   case 2:
-    if (isLeapYear(year)) {
+    if (isLeapYear(year))
+    {
       return 29;
     }
     return 28;
@@ -386,19 +416,23 @@ int daysInMonth(int month, int year) {
 // SELESAI JIKA: [ ] M-ITEM-2 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua
 // pemilik modul.
-bool isValidDate(std::string date) {
+bool isValidDate(std::string date)
+{
   if (date.length() != 10)
     return false;
 
   if (date[4] != '-' || date[7] != '-')
     return false;
 
-  for (int i = 0; i < 10; i++) {
-    if (i == 4 || i == 7) {
+  for (int i = 0; i < 10; i++)
+  {
+    if (i == 4 || i == 7)
+    {
       continue;
     }
 
-    if (date[i] < '0' || date[i] > '9') {
+    if (date[i] < '0' || date[i] > '9')
+    {
       return false;
     }
   }
@@ -416,7 +450,8 @@ bool isValidDate(std::string date) {
   if (month < 1 || month > 12)
     return false;
 
-  if (day < 1 || day > daysInMonth(month, year)) {
+  if (day < 1 || day > daysInMonth(month, year))
+  {
     return false;
   }
 
@@ -434,7 +469,8 @@ bool isValidDate(std::string date) {
 // SELESAI JIKA: [ ] M-ITEM-3 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua
 // pemilik modul.
-std::string getTodayDate() {
+std::string getTodayDate()
+{
   // bagian ini sudah jadi karena memakai <ctime> yang belum diajarkan
   time_t now = time(0);
   tm *local = localtime(&now);
@@ -454,7 +490,8 @@ std::string getTodayDate() {
 // HATI-HATI: perbandingan teks ini hanya aman jika format selalu YYYY-MM-DD
 // lengkap dengan nol di depan. SELESAI JIKA: [ ] M-ITEM-3 lulus. JANGAN ubah
 // nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-bool isFutureDate(std::string date) {
+bool isFutureDate(std::string date)
+{
   if (isValidDate(date) == false)
     return false;
 
@@ -518,7 +555,8 @@ int toIndex(int displayNo) { return displayNo - 1; }
 // HATI-HATI: jangan pakai cin >> karena nama dan deskripsi boleh memiliki
 // spasi. SELESAI JIKA: [ ] M-UI-1 lulus. JANGAN ubah nama, parameter, atau tipe
 // return fungsi ini tanpa lapor semua pemilik modul.
-std::string readLine(std::string prompt) {
+std::string readLine(std::string prompt)
+{
   cout << prompt;
   std::string result;
   getline(cin, result);
@@ -538,25 +576,31 @@ std::string readLine(std::string prompt) {
 // HATI-HATI: selalu baca lewat readLine supaya tidak ada sisa newline untuk
 // getline berikutnya. SELESAI JIKA: [ ] M-UI-1 lulus. JANGAN ubah nama,
 // parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-int readInt(std::string prompt, int minValue, int maxValue) {
-  while (true) {
+int readInt(std::string prompt, int minValue, int maxValue)
+{
+  while (true)
+  {
     std::string text = readLine(prompt);
 
     // Memeriksa apakah input hanya terdiri dari angka
-    if (!isAllDigits(text)) {
+    if (!isAllDigits(text))
+    {
       cout << "Masukkan angka yang benar.\n";
       continue;
     }
-    
+
     // Mengubah teks menjadi bilangan bulat
-    else {
+    else
+    {
       int result = 0;
-      for (int i = 0; i < (int)text.length(); i++) {
+      for (int i = 0; i < (int)text.length(); i++)
+      {
         result = result * 10 + (text[i] - '0');
       }
 
       // Memeriksa apakah angka berada dalam batas
-      if (result >= minValue && result <= maxValue) {
+      if (result >= minValue && result <= maxValue)
+      {
         return result;
       }
       cout << "Masukkan angka dari " << minValue << " sampai " << maxValue
@@ -588,7 +632,8 @@ void pauseScreen() { readLine("Tekan Enter untuk lanjut..."); }
 // SELESAI JIKA: [ ] M-UI-1 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua
 // pemilik modul.
-void printHeader(std::string title) {
+void printHeader(std::string title)
+{
   std::cout << "\n==============================\n";
   std::cout << title << "\n";
   std::cout << "==============================\n";
@@ -619,137 +664,163 @@ void printHeader(std::string title) {
 // HATI-HATI: file belum ada bukan error; indeks di file dimulai dari 0, nomor layar dimulai dari 1.
 // SELESAI JIKA: [ ] M-STORAGE-1 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-void loadAll() {
-    // 1. Reset seluruh count ke 0 terlebih dahulu
-    userCount = 0;
-    foundCount = 0;
-    lostCount = 0;
-    claimCount = 0;
+void loadAll()
+{
+  // 1. Reset seluruh count ke 0 terlebih dahulu
+  userCount = 0;
+  foundCount = 0;
+  lostCount = 0;
+  claimCount = 0;
 
-    // --- Memuat users.txt ---
-    std::ifstream userFile("users.txt");
-    if (userFile.is_open()) {
-        std::string line;
-        while (getline(userFile, line)) {
-            if (userCount >= MAX_USERS) {
-                break;
-            }
-            std::string parts[5];
-            int partsCount = splitLine(line, '|', parts, 5);
-            if (partsCount == 5) {
-                userName[userCount] = parts[0];
-                userPassword[userCount] = parts[1];
-                userPhone[userCount] = parts[2];
+  // --- Memuat users.txt ---
+  std::ifstream userFile("users.txt");
+  if (userFile.is_open())
+  {
+    std::string line;
+    while (getline(userFile, line))
+    {
+      if (userCount >= MAX_USERS)
+      {
+        break;
+      }
+      std::string parts[5];
+      int partsCount = splitLine(line, '|', parts, 5);
+      if (partsCount == 5)
+      {
+        userName[userCount] = parts[0];
+        userPassword[userCount] = parts[1];
+        userPhone[userCount] = parts[2];
 
-                // Konversi string failed ke integer secara manual
-                int failedVal = 0;
-                for (int i = 0; i < (int)parts[3].length(); i++) {
-                    if (parts[3][i] >= '0' && parts[3][i] <= '9') {
-                        failedVal = failedVal * 10 + (parts[3][i] - '0');
-                    }
-                }
-                userFailed[userCount] = failedVal;
-                userLocked[userCount] = (parts[4] == "1");
-
-                userCount++;
-            }
+        // Konversi string failed ke integer secara manual
+        int failedVal = 0;
+        for (int i = 0; i < (int)parts[3].length(); i++)
+        {
+          if (parts[3][i] >= '0' && parts[3][i] <= '9')
+          {
+            failedVal = failedVal * 10 + (parts[3][i] - '0');
+          }
         }
-        userFile.close();
+        userFailed[userCount] = failedVal;
+        userLocked[userCount] = (parts[4] == "1");
+
+        userCount++;
+      }
     }
+    userFile.close();
+  }
 
-    // --- Memuat found_items.txt ---
-    std::ifstream foundFile("found_items.txt");
-    if (foundFile.is_open()) {
-        std::string line;
-        while (getline(foundFile, line)) {
-            if (foundCount >= MAX_FOUND) {
-                break;
-            }
-            std::string parts[8];
-            int partsCount = splitLine(line, '|', parts, 8);
-            if (partsCount == 8) {
-                int repIndex = 0;
-                for (int i = 0; i < (int)parts[0].length(); i++) {
-                    if (parts[0][i] >= '0' && parts[0][i] <= '9') {
-                        repIndex = repIndex * 10 + (parts[0][i] - '0');
-                    }
-                }
-
-                foundReporter[foundCount] = repIndex;
-                foundName[foundCount] = parts[1];
-                foundCategory[foundCount] = parts[2];
-                foundLocation[foundCount] = parts[3];
-                foundDate[foundCount] = parts[4];
-                foundDescription[foundCount] = parts[5];
-                foundSecret[foundCount] = parts[6];
-                foundStatus[foundCount] = parts[7];
-
-                foundCount++;
-            }
+  // --- Memuat found_items.txt ---
+  std::ifstream foundFile("found_items.txt");
+  if (foundFile.is_open())
+  {
+    std::string line;
+    while (getline(foundFile, line))
+    {
+      if (foundCount >= MAX_FOUND)
+      {
+        break;
+      }
+      std::string parts[8];
+      int partsCount = splitLine(line, '|', parts, 8);
+      if (partsCount == 8)
+      {
+        int repIndex = 0;
+        for (int i = 0; i < (int)parts[0].length(); i++)
+        {
+          if (parts[0][i] >= '0' && parts[0][i] <= '9')
+          {
+            repIndex = repIndex * 10 + (parts[0][i] - '0');
+          }
         }
-        foundFile.close();
+
+        foundReporter[foundCount] = repIndex;
+        foundName[foundCount] = parts[1];
+        foundCategory[foundCount] = parts[2];
+        foundLocation[foundCount] = parts[3];
+        foundDate[foundCount] = parts[4];
+        foundDescription[foundCount] = parts[5];
+        foundSecret[foundCount] = parts[6];
+        foundStatus[foundCount] = parts[7];
+
+        foundCount++;
+      }
     }
+    foundFile.close();
+  }
 
-    // --- Memuat lost_reports.txt ---
-    std::ifstream lostFile("lost_reports.txt");
-    if (lostFile.is_open()) {
-        std::string line;
-        while (getline(lostFile, line)) {
-            if (lostCount >= MAX_LOST) {
-                break;
-            }
-            std::string parts[6];
-            int partsCount = splitLine(line, '|', parts, 6);
-            if (partsCount == 6) {
-                int repIndex = 0;
-                for (int i = 0; i < (int)parts[0].length(); i++) {
-                    if (parts[0][i] >= '0' && parts[0][i] <= '9') {
-                        repIndex = repIndex * 10 + (parts[0][i] - '0');
-                    }
-                }
-
-                lostReporter[lostCount] = repIndex;
-                lostName[lostCount] = parts[1];
-                lostCategory[lostCount] = parts[2];
-                lostLocation[lostCount] = parts[3];
-                lostDate[lostCount] = parts[4];
-                lostDescription[lostCount] = parts[5];
-
-                lostCount++;
-            }
+  // --- Memuat lost_reports.txt ---
+  std::ifstream lostFile("lost_reports.txt");
+  if (lostFile.is_open())
+  {
+    std::string line;
+    while (getline(lostFile, line))
+    {
+      if (lostCount >= MAX_LOST)
+      {
+        break;
+      }
+      std::string parts[6];
+      int partsCount = splitLine(line, '|', parts, 6);
+      if (partsCount == 6)
+      {
+        int repIndex = 0;
+        for (int i = 0; i < (int)parts[0].length(); i++)
+        {
+          if (parts[0][i] >= '0' && parts[0][i] <= '9')
+          {
+            repIndex = repIndex * 10 + (parts[0][i] - '0');
+          }
         }
-        lostFile.close();
+
+        lostReporter[lostCount] = repIndex;
+        lostName[lostCount] = parts[1];
+        lostCategory[lostCount] = parts[2];
+        lostLocation[lostCount] = parts[3];
+        lostDate[lostCount] = parts[4];
+        lostDescription[lostCount] = parts[5];
+
+        lostCount++;
+      }
     }
+    lostFile.close();
+  }
 
-    // --- Memuat claim_attempts.txt / claims.txt ---
-    std::ifstream claimFile("claims.txt");
-    if (claimFile.is_open()) {
-        std::string line;
-        while (getline(claimFile, line)) {
-            if (claimCount >= MAX_CLAIMS) {
-                break;
-            }
-            std::string parts[3];
-            int partsCount = splitLine(line, '|', parts, 3);
-            if (partsCount == 3) {
-                int cItem = 0, cUser = 0, cFailed = 0;
+  // --- Memuat claim_attempts.txt / claims.txt ---
+  std::ifstream claimFile("claims.txt");
+  if (claimFile.is_open())
+  {
+    std::string line;
+    while (getline(claimFile, line))
+    {
+      if (claimCount >= MAX_CLAIMS)
+      {
+        break;
+      }
+      std::string parts[3];
+      int partsCount = splitLine(line, '|', parts, 3);
+      if (partsCount == 3)
+      {
+        int cItem = 0, cUser = 0, cFailed = 0;
 
-                for (int i = 0; i < (int)parts[0].length(); i++)
-                    if (parts[0][i] >= '0' && parts[0][i] <= '9') cItem = cItem * 10 + (parts[0][i] - '0');
-                for (int i = 0; i < (int)parts[1].length(); i++)
-                    if (parts[1][i] >= '0' && parts[1][i] <= '9') cUser = cUser * 10 + (parts[1][i] - '0');
-                for (int i = 0; i < (int)parts[2].length(); i++)
-                    if (parts[2][i] >= '0' && parts[2][i] <= '9') cFailed = cFailed * 10 + (parts[2][i] - '0');
+        for (int i = 0; i < (int)parts[0].length(); i++)
+          if (parts[0][i] >= '0' && parts[0][i] <= '9')
+            cItem = cItem * 10 + (parts[0][i] - '0');
+        for (int i = 0; i < (int)parts[1].length(); i++)
+          if (parts[1][i] >= '0' && parts[1][i] <= '9')
+            cUser = cUser * 10 + (parts[1][i] - '0');
+        for (int i = 0; i < (int)parts[2].length(); i++)
+          if (parts[2][i] >= '0' && parts[2][i] <= '9')
+            cFailed = cFailed * 10 + (parts[2][i] - '0');
 
-                claimItem[claimCount] = cItem;
-                claimUser[claimCount] = cUser;
-                claimFailed[claimCount] = cFailed;
+        claimItem[claimCount] = cItem;
+        claimUser[claimCount] = cUser;
+        claimFailed[claimCount] = cFailed;
 
-                claimCount++;
-            }
-        }
-        claimFile.close();
+        claimCount++;
+      }
     }
+    claimFile.close();
+  }
 }
 
 // PEMILIK TODO: Muflih
@@ -765,8 +836,9 @@ void loadAll() {
 // HATI-HATI: jangan menulis foundSecret ke layar, tetapi tetap wajib ditulis ke found_items.txt untuk data klaim.
 // SELESAI JIKA: [ ] M-STORAGE-2 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-void saveAll() {
-    // Penyimpanan file bersifat opsional; tidak ada data yang berubah pada stub ini.
+void saveAll()
+{
+  // Penyimpanan file bersifat opsional; tidak ada data yang berubah pada stub ini.
 }
 
 // ============ [PEMILIK Muflih] auth ============
@@ -792,11 +864,14 @@ void saveAll() {
 // HATI-HATI: indeks 0 adalah hasil valid; jangan memakai if(hasil) untuk
 // menentukan ada atau tidak. SELESAI JIKA: [ ] M-AUTH-1 lulus. JANGAN ubah
 // nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-int findUserByUsername(std::string username) {
+int findUserByUsername(std::string username)
+{
   username = toLower(username);
 
-  for (int i = 0; i < userCount; i++) {
-    if (toLower(userName[i]) == username) {
+  for (int i = 0; i < userCount; i++)
+  {
+    if (toLower(userName[i]) == username)
+    {
       return i;
     }
   }
@@ -822,13 +897,16 @@ int findUserByUsername(std::string username) {
 // M-AUTH-2 lulus. JANGAN ubah nama, parameter, atau tipe return fungsi ini
 // tanpa lapor semua pemilik modul.
 int registerUser(std::string username, std::string password,
-                 std::string phone) {
+                 std::string phone)
+{
   if (username == "" || password == "" || phone == "")
     return REG_EMPTY_FIELD;
 
   int length = username.length();
-  for (int i = 0; i < length; i++) {
-    if (username[i] == ' ') {
+  for (int i = 0; i < length; i++)
+  {
+    if (username[i] == ' ')
+    {
       return REG_USERNAME_HAS_SPACE;
     }
   }
@@ -872,7 +950,8 @@ int registerUser(std::string username, std::string password,
 // dengan >= 0. Dilarang cout di sini. SELESAI JIKA: [ ] M-AUTH-3 dan M-AUTH-4
 // lulus. JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor
 // semua pemilik modul.
-int loginUser(std::string username, std::string password) {
+int loginUser(std::string username, std::string password)
+{
   int index = findUserByUsername(username);
   if (index == -1)
     return LOGIN_NOT_FOUND;
@@ -880,17 +959,23 @@ int loginUser(std::string username, std::string password) {
   if (userLocked[index] == true)
     return LOGIN_LOCKED;
 
-  if (userPassword[index] == password) {
+  if (userPassword[index] == password)
+  {
     userFailed[index] = 0;
     return index;
-  } else {
+  }
+  else
+  {
     userFailed[index] += 1;
   }
 
-  if (userFailed[index] >= MAX_LOGIN_ATTEMPTS) {
+  if (userFailed[index] >= MAX_LOGIN_ATTEMPTS)
+  {
     userLocked[index] = true;
     return LOGIN_LOCKED;
-  } else {
+  }
+  else
+  {
     return LOGIN_WRONG_PASSWORD;
   }
 
@@ -929,41 +1014,46 @@ int loginUser(std::string username, std::string password) {
 // tanpa lapor semua pemilik modul.
 int addFoundItem(int reporterIndex, std::string name, std::string category,
                  std::string location, string dateFound,
-                 std::string description, std::string secretDetail) {
-    // 1. Cek field wajib tidak boleh kosong (description opsional)
-    if (trim(name) == "" || trim(category) == "" || trim(location) == "" || 
-        trim(dateFound) == "" || trim(secretDetail) == "") {
-        return ITEM_EMPTY_FIELD;
-    }
+                 std::string description, std::string secretDetail)
+{
+  // 1. Cek field wajib tidak boleh kosong (description opsional)
+  if (trim(name) == "" || trim(category) == "" || trim(location) == "" ||
+      trim(dateFound) == "" || trim(secretDetail) == "")
+  {
+    return ITEM_EMPTY_FIELD;
+  }
 
-    // 2. Cek apakah format tanggal valid
-    if (!isValidDate(dateFound)) {
-        return ITEM_INVALID_DATE;
-    }
+  // 2. Cek apakah format tanggal valid
+  if (!isValidDate(dateFound))
+  {
+    return ITEM_INVALID_DATE;
+  }
 
-    // 3. Cek apakah tanggal berada di masa depan
-    if (isFutureDate(dateFound)) {
-        return ITEM_FUTURE_DATE;
-    }
+  // 3. Cek apakah tanggal berada di masa depan
+  if (isFutureDate(dateFound))
+  {
+    return ITEM_FUTURE_DATE;
+  }
 
-    // 4. Cek apakah kapasitas penyimpanan sudah penuh
-    if (foundCount >= MAX_FOUND) {
-        return ITEM_FULL;
-    }
+  // 4. Cek apakah kapasitas penyimpanan sudah penuh
+  if (foundCount >= MAX_FOUND)
+  {
+    return ITEM_FULL;
+  }
 
-    // 5. Isi semua array found pada indeks foundCount, terapkan sanitizeField pada teks
-    foundReporter[foundCount] = reporterIndex;
-    foundName[foundCount] = sanitizeField(name);
-    foundCategory[foundCount] = sanitizeField(category);
-    foundLocation[foundCount] = sanitizeField(location);
-    foundDate[foundCount] = dateFound;
-    foundDescription[foundCount] = sanitizeField(description);
-    foundSecret[foundCount] = sanitizeField(secretDetail);
-    foundStatus[foundCount] = STATUS_AVAILABLE;
+  // 5. Isi semua array found pada indeks foundCount, terapkan sanitizeField pada teks
+  foundReporter[foundCount] = reporterIndex;
+  foundName[foundCount] = sanitizeField(name);
+  foundCategory[foundCount] = sanitizeField(category);
+  foundLocation[foundCount] = sanitizeField(location);
+  foundDate[foundCount] = dateFound;
+  foundDescription[foundCount] = sanitizeField(description);
+  foundSecret[foundCount] = sanitizeField(secretDetail);
+  foundStatus[foundCount] = STATUS_AVAILABLE;
 
-    // 6. Naikkan foundCount setelah semua pasangan terisi, lalu return ITEM_OK
-    foundCount++;
-    return ITEM_OK;
+  // 6. Naikkan foundCount setelah semua pasangan terisi, lalu return ITEM_OK
+  foundCount++;
+  return ITEM_OK;
 }
 
 // PEMILIK TODO: Haris
@@ -982,37 +1072,42 @@ int addFoundItem(int reporterIndex, std::string name, std::string category,
 // parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 int addLostReport(int reporterIndex, std::string name, std::string category,
                   std::string location, string dateLost,
-                  std::string description) {
-    // 1. Cek field wajib tidak boleh kosong (description boleh kosong)
-    if (trim(name) == "" || trim(category) == "" || trim(location) == "" || trim(dateLost) == "") {
-        return ITEM_EMPTY_FIELD;
-    }
+                  std::string description)
+{
+  // 1. Cek field wajib tidak boleh kosong (description boleh kosong)
+  if (trim(name) == "" || trim(category) == "" || trim(location) == "" || trim(dateLost) == "")
+  {
+    return ITEM_EMPTY_FIELD;
+  }
 
-    // 2. Jika tanggal tidak valid -> ITEM_INVALID_DATE; jika masa depan -> ITEM_FUTURE_DATE
-    if (!isValidDate(dateLost)) {
-        return ITEM_INVALID_DATE;
-    }
+  // 2. Jika tanggal tidak valid -> ITEM_INVALID_DATE; jika masa depan -> ITEM_FUTURE_DATE
+  if (!isValidDate(dateLost))
+  {
+    return ITEM_INVALID_DATE;
+  }
 
-    if (isFutureDate(dateLost)) {
-        return ITEM_FUTURE_DATE;
-    }
+  if (isFutureDate(dateLost))
+  {
+    return ITEM_FUTURE_DATE;
+  }
 
-    // 3. Jika lostCount sudah MAX_LOST -> ITEM_FULL
-    if (lostCount >= MAX_LOST) {
-        return ITEM_FULL;
-    }
+  // 3. Jika lostCount sudah MAX_LOST -> ITEM_FULL
+  if (lostCount >= MAX_LOST)
+  {
+    return ITEM_FULL;
+  }
 
-    // 4. Isi seluruh array lost pada indeks lostCount dengan sanitizeField untuk semua teks
-    lostReporter[lostCount] = reporterIndex;
-    lostName[lostCount] = sanitizeField(name);
-    lostCategory[lostCount] = sanitizeField(category);
-    lostLocation[lostCount] = sanitizeField(location);
-    lostDate[lostCount] = dateLost;
-    lostDescription[lostCount] = sanitizeField(description);
+  // 4. Isi seluruh array lost pada indeks lostCount dengan sanitizeField untuk semua teks
+  lostReporter[lostCount] = reporterIndex;
+  lostName[lostCount] = sanitizeField(name);
+  lostCategory[lostCount] = sanitizeField(category);
+  lostLocation[lostCount] = sanitizeField(location);
+  lostDate[lostCount] = dateLost;
+  lostDescription[lostCount] = sanitizeField(description);
 
-    // 5. Naikkan lostCount lalu return ITEM_OK
-    lostCount++;
-    return ITEM_OK;
+  // 5. Naikkan lostCount lalu return ITEM_OK
+  lostCount++;
+  return ITEM_OK;
 }
 
 // PEMILIK TODO: Mudhofar DONE
@@ -1034,42 +1129,48 @@ int addLostReport(int reporterIndex, std::string name, std::string category,
 // ] M-ITEM-4 dan M-ITEM-5 lulus. JANGAN ubah nama, parameter, atau tipe return
 // fungsi ini tanpa lapor semua pemilik modul.
 int searchAvailableItems(std::string keyword, std::string category,
-                         std::string location) {
-  
-   // Reset jumlah hasil pencarian 
-   searchResultCount = 0;
+                         std::string location)
+{
 
-   // Periksa seluruh data barang temuan
-   for (int i = 0; i < foundCount; i++) {
+  // Reset jumlah hasil pencarian
+  searchResultCount = 0;
+
+  // Periksa seluruh data barang temuan
+  for (int i = 0; i < foundCount; i++)
+  {
 
     // lewati barang yang tidak tersedia
-    if (foundStatus[i] != STATUS_AVAILABLE) {
+    if (foundStatus[i] != STATUS_AVAILABLE)
+    {
       continue;
     }
 
     // Periksa keyword pada nama atau deskripsi barang
     if (keyword != "" &&
-      !containsIgnoreCase(foundName[i], keyword) &&
-      !containsIgnoreCase(foundDescription[i], keyword)){
-        continue;
-      }
+        !containsIgnoreCase(foundName[i], keyword) &&
+        !containsIgnoreCase(foundDescription[i], keyword))
+    {
+      continue;
+    }
 
     // Periksa kategori barang
     if (category != "" &&
-      !containsIgnoreCase(foundCategory[i], category)) {
-        continue;
-      }
+        !containsIgnoreCase(foundCategory[i], category))
+    {
+      continue;
+    }
 
     // Periksa lokasi barang
     if (location != "" &&
-      !containsIgnoreCase(foundLocation[i], location)) {
+        !containsIgnoreCase(foundLocation[i], location))
+    {
       continue;
     }
 
     // Simpan indeks asli barang ke hasil pencarian
     searchResult[searchResultCount] = i;
     searchResultCount++;
-   }
+  }
 
   return searchResultCount;
 }
@@ -1086,7 +1187,8 @@ int searchAvailableItems(std::string keyword, std::string category,
 // HATI-HATI: yang disimpan adalah indeks asli barang, bukan nomor tampilan
 // indeks+1. SELESAI JIKA: [ ] M-ITEM-6 lulus. JANGAN ubah nama, parameter, atau
 // tipe return fungsi ini tanpa lapor semua pemilik modul.
-int listItemsByReporter(int reporterIndex) {
+int listItemsByReporter(int reporterIndex)
+{
   (void)reporterIndex; // hapus komentar ini setelah dipakai
   searchResultCount = 0;
   return 0;
@@ -1118,13 +1220,16 @@ int listItemsByReporter(int reporterIndex) {
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 
 // Mengambil jumlah jawaban klaim salah untuk pasanagan item dan pengguna
-int getFailedClaimCount(int itemIndex, int userIndex) {
-    for (int i = 0; i < claimCount; i++) {
-      if (claimItem[i] == itemIndex &&
-          claimUser[i] == userIndex) {
-          return claimFailed[i];
-      }
+int getFailedClaimCount(int itemIndex, int userIndex)
+{
+  for (int i = 0; i < claimCount; i++)
+  {
+    if (claimItem[i] == itemIndex &&
+        claimUser[i] == userIndex)
+    {
+      return claimFailed[i];
     }
+  }
 
   return 0;
 }
@@ -1141,8 +1246,9 @@ int getFailedClaimCount(int itemIndex, int userIndex) {
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 
 // Mengambil username dan nomor telepon penemu barang
-std::string getFinderContact(int itemIndex) {
-    int reporterIndex = foundReporter[itemIndex];
+std::string getFinderContact(int itemIndex)
+{
+  int reporterIndex = foundReporter[itemIndex];
 
   return userName[reporterIndex] + " - " + userPhone[reporterIndex];
 }
@@ -1172,41 +1278,49 @@ std::string getFinderContact(int itemIndex) {
 // pemilik modul.
 
 // Memproses percobaan klaim barang
-int submitClaim(int claimantIndex, int itemIndex, std::string secretAnswer) {
-  
+int submitClaim(int claimantIndex, int itemIndex, std::string secretAnswer)
+{
+
   // Periksa apakah indeks barang falid
-  if (itemIndex < 0 || itemIndex >= foundCount) {
+  if (itemIndex < 0 || itemIndex >= foundCount)
+  {
     return CLAIM_ITEM_NOT_FOUND;
   }
 
   // Periksa apakah barang masih tersedia
-  if (foundStatus[itemIndex] != STATUS_AVAILABLE){
+  if (foundStatus[itemIndex] != STATUS_AVAILABLE)
+  {
     return CLAIM_NOT_AVAILABLE;
   }
 
   // Pengguna tidak boleh mengklaim barang temuannya sendiri
-  if (foundReporter[itemIndex] == claimantIndex) {
+  if (foundReporter[itemIndex] == claimantIndex)
+  {
     return CLAIM_OWN_ITEM;
   }
 
   // Periksa batas percobaan klaim
-  if (getFailedClaimCount(itemIndex, claimantIndex) >= MAX_CLAIM_ATTEMPTS){
+  if (getFailedClaimCount(itemIndex, claimantIndex) >= MAX_CLAIM_ATTEMPTS)
+  {
     return CLAIM_TOO_MANY_ATTEMPTS;
   }
 
   // Bandingkan jawaban dengan detail rahasia
-  if (toLower(trim(secretAnswer)) == 
-      toLower(trim(foundSecret[itemIndex]))){
+  if (toLower(trim(secretAnswer)) ==
+      toLower(trim(foundSecret[itemIndex])))
+  {
 
-        foundStatus[itemIndex] = "Dikembalikan";
+    foundStatus[itemIndex] = "Dikembalikan";
 
-        return CLAIM_APPROVED;
-      }
+    return CLAIM_APPROVED;
+  }
 
   // Jika jawaban salah, cari data percobaan klaim sebelumnya
-  for (int i = 0; i < claimCount; i++) {
+  for (int i = 0; i < claimCount; i++)
+  {
     if (claimItem[i] == itemIndex &&
-    claimUser[i] == claimantIndex) {
+        claimUser[i] == claimantIndex)
+    {
 
       claimFailed[i]++;
       return CLAIM_WRONG_DETAIL;
@@ -1214,7 +1328,8 @@ int submitClaim(int claimantIndex, int itemIndex, std::string secretAnswer) {
   }
 
   // Jika belum ada data klaim dan penyimpana penuh
-  if (claimCount >= MAX_CLAIMS) {
+  if (claimCount >= MAX_CLAIMS)
+  {
     return CLAIM_STORAGE_FULL;
   }
 
@@ -1253,8 +1368,9 @@ int submitClaim(int claimantIndex, int itemIndex, std::string secretAnswer) {
 // HATI-HATI: layar menyimpan input dengan readLine; modul auth tidak boleh memakai cout/cin/file.
 // SELESAI JIKA: [ ] M-AUTH-1 dan M-AUTH-2 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-void showRegisterScreen() {
-    // Stub layar: isi setelah registerUser selesai dikerjakan.
+void showRegisterScreen()
+{
+  // Stub layar: isi setelah registerUser selesai dikerjakan.
 }
 
 // PEMILIK TODO: Muflih
@@ -1269,9 +1385,10 @@ void showRegisterScreen() {
 // HATI-HATI: indeks 0 sukses; selalu cek hasil >= 0, bukan if(hasil).
 // SELESAI JIKA: [ ] M-AUTH-3 dan M-AUTH-4 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-int showLoginScreen() {
-    // Stub aman: -1 berarti kembali ke menu tamu.
-    return -1;
+int showLoginScreen()
+{
+  // Stub aman: -1 berarti kembali ke menu tamu.
+  return -1;
 }
 
 // ============ [PEMILIK Haris dan Muflih] item_screen ============
@@ -1300,39 +1417,51 @@ int showLoginScreen() {
 // HATI-HATI: detail rahasia hanya diminta untuk verifikasi klaim, tidak boleh
 // dicetak. SELESAI JIKA: [ ] M-ITEM-1 sampai M-ITEM-3 lulus. JANGAN ubah nama,
 // parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-void showReportFoundScreen(int userIndex) {
-    printHeader("Lapor Barang Temuan");
+void showReportFoundScreen(int userIndex)
+{
+  printHeader("Lapor Barang Temuan");
 
-    // 1. Ambil input dengan readLine
-    std::string name = readLine("Nama barang: ");
-    std::string category = readLine("Kategori: ");
-    std::string location = readLine("Lokasi ditemukan: ");
-    std::string date = readLine("Tanggal (YYYY-MM-DD): ");
-    std::string description = readLine("Deskripsi (boleh kosong): ");
-    std::string secretDetail = readLine("Detail rahasia (untuk verifikasi klaim): ");
+  // 1. Ambil input dengan readLine
+  std::string name = readLine("Nama barang: ");
+  std::string category = readLine("Kategori: ");
+  std::string location = readLine("Lokasi ditemukan: ");
+  std::string date = readLine("Tanggal (YYYY-MM-DD): ");
+  std::string description = readLine("Deskripsi (boleh kosong): ");
+  std::string secretDetail = readLine("Detail rahasia (untuk verifikasi klaim): ");
 
-    // 2. Panggil addFoundItem dan simpan kode hasilnya
-    int result = addFoundItem(userIndex, name, category, location, date, description, secretDetail);
+  // 2. Panggil addFoundItem dan simpan kode hasilnya
+  int result = addFoundItem(userIndex, name, category, location, date, description, secretDetail);
 
-    // 3. Tampilkan pesan berdasarkan kode ITEM_* memakai if/else (tanpa mencetak secret detail)
-    if (result == ITEM_OK) {
-        std::cout << "Laporan barang temuan berhasil disimpan!\n";
-        // 4. Jika ITEM_OK, panggil saveAll tepat sekali
-        saveAll();
-    } else if (result == ITEM_EMPTY_FIELD) {
-        std::cout << "Gagal: Semua kolom wajib harus diisi (kecuali deskripsi).\n";
-    } else if (result == ITEM_INVALID_DATE) {
-        std::cout << "Gagal: Format tanggal tidak valid (gunakan YYYY-MM-DD).\n";
-    } else if (result == ITEM_FUTURE_DATE) {
-        std::cout << "Gagal: Tanggal tidak boleh berada di masa depan.\n";
-    } else if (result == ITEM_FULL) {
-        std::cout << "Gagal: Penyimpanan laporan temuan sudah penuh.\n";
-    } else {
-        std::cout << "Gagal: Terjadi kesalahan yang tidak diketahui.\n";
-    }
+  // 3. Tampilkan pesan berdasarkan kode ITEM_* memakai if/else (tanpa mencetak secret detail)
+  if (result == ITEM_OK)
+  {
+    std::cout << "Laporan barang temuan berhasil disimpan!\n";
+    // 4. Jika ITEM_OK, panggil saveAll tepat sekali
+    saveAll();
+  }
+  else if (result == ITEM_EMPTY_FIELD)
+  {
+    std::cout << "Gagal: Semua kolom wajib harus diisi (kecuali deskripsi).\n";
+  }
+  else if (result == ITEM_INVALID_DATE)
+  {
+    std::cout << "Gagal: Format tanggal tidak valid (gunakan YYYY-MM-DD).\n";
+  }
+  else if (result == ITEM_FUTURE_DATE)
+  {
+    std::cout << "Gagal: Tanggal tidak boleh berada di masa depan.\n";
+  }
+  else if (result == ITEM_FULL)
+  {
+    std::cout << "Gagal: Penyimpanan laporan temuan sudah penuh.\n";
+  }
+  else
+  {
+    std::cout << "Gagal: Terjadi kesalahan yang tidak diketahui.\n";
+  }
 
-    // 5. Panggil pauseScreen sebelum kembali ke menu
-    pauseScreen();
+  // 5. Panggil pauseScreen sebelum kembali ke menu
+  pauseScreen();
 }
 
 // PEMILIK TODO: Haris
@@ -1350,48 +1479,64 @@ void showReportFoundScreen(int userIndex) {
 // tetap dapat mengubahnya. SELESAI JIKA: [ ] M-ITEM-1 dan M-ITEM-5 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua
 // pemilik modul.
-void showReportLostScreen(int userIndex, std::string prefillName) {
-    printHeader("Lapor Barang Hilang");
+void showReportLostScreen(int userIndex, std::string prefillName)
+{
+  printHeader("Lapor Barang Hilang");
 
-    std::string name = "";
-    // 1. Jika prefillName tidak kosong, tampilkan dan tawarkan sebagai nama awal; tetap gunakan readLine untuk nama akhir
-    if (prefillName != "") {
-        std::cout << "Nama barang (rekomendasi dari pencarian: " << prefillName << ")\n";
-        name = readLine("Nama barang akhir [Tekan Enter untuk pakai rekomendasi]: ");
-        if (trim(name) == "") {
-            name = prefillName;
-        }
-    } else {
-        name = readLine("Nama barang: ");
+  std::string name = "";
+  // 1. Jika prefillName tidak kosong, tampilkan dan tawarkan sebagai nama awal; tetap gunakan readLine untuk nama akhir
+  if (prefillName != "")
+  {
+    std::cout << "Nama barang (rekomendasi dari pencarian: " << prefillName << ")\n";
+    name = readLine("Nama barang akhir [Tekan Enter untuk pakai rekomendasi]: ");
+    if (trim(name) == "")
+    {
+      name = prefillName;
     }
+  }
+  else
+  {
+    name = readLine("Nama barang: ");
+  }
 
-    // 2. Ambil category, location, date, dan description dengan readLine
-    std::string category = readLine("Kategori: ");
-    std::string location = readLine("Lokasi hilang: ");
-    std::string date = readLine("Tanggal hilang (YYYY-MM-DD): ");
-    std::string description = readLine("Deskripsi (boleh kosong): ");
+  // 2. Ambil category, location, date, dan description dengan readLine
+  std::string category = readLine("Kategori: ");
+  std::string location = readLine("Lokasi hilang: ");
+  std::string date = readLine("Tanggal hilang (YYYY-MM-DD): ");
+  std::string description = readLine("Deskripsi (boleh kosong): ");
 
-    // 3. Panggil addLostReport lalu tampilkan pesan ITEM_* dengan if/else
-    int result = addLostReport(userIndex, name, category, location, date, description);
+  // 3. Panggil addLostReport lalu tampilkan pesan ITEM_* dengan if/else
+  int result = addLostReport(userIndex, name, category, location, date, description);
 
-    if (result == ITEM_OK) {
-        std::cout << "Laporan barang hilang berhasil disimpan!\n";
-        // 4. Jika ITEM_OK, panggil saveAll
-        saveAll();
-    } else if (result == ITEM_EMPTY_FIELD) {
-        std::cout << "Gagal: Semua kolom wajib harus diisi (kecuali deskripsi).\n";
-    } else if (result == ITEM_INVALID_DATE) {
-        std::cout << "Gagal: Format tanggal tidak valid (gunakan YYYY-MM-DD).\n";
-    } else if (result == ITEM_FUTURE_DATE) {
-        std::cout << "Gagal: Tanggal tidak boleh berada di masa depan.\n";
-    } else if (result == ITEM_FULL) {
-        std::cout << "Gagal: Penyimpanan laporan hilang sudah penuh.\n";
-    } else {
-        std::cout << "Gagal: Terjadi kesalahan yang tidak diketahui.\n";
-    }
+  if (result == ITEM_OK)
+  {
+    std::cout << "Laporan barang hilang berhasil disimpan!\n";
+    // 4. Jika ITEM_OK, panggil saveAll
+    saveAll();
+  }
+  else if (result == ITEM_EMPTY_FIELD)
+  {
+    std::cout << "Gagal: Semua kolom wajib harus diisi (kecuali deskripsi).\n";
+  }
+  else if (result == ITEM_INVALID_DATE)
+  {
+    std::cout << "Gagal: Format tanggal tidak valid (gunakan YYYY-MM-DD).\n";
+  }
+  else if (result == ITEM_FUTURE_DATE)
+  {
+    std::cout << "Gagal: Tanggal tidak boleh berada di masa depan.\n";
+  }
+  else if (result == ITEM_FULL)
+  {
+    std::cout << "Gagal: Penyimpanan laporan hilang sudah penuh.\n";
+  }
+  else
+  {
+    std::cout << "Gagal: Terjadi kesalahan yang tidak diketahui.\n";
+  }
 
-    // Kemudian pauseScreen
-    pauseScreen();
+  // Kemudian pauseScreen
+  pauseScreen();
 }
 
 // PEMILIK TODO: Muflih
@@ -1408,7 +1553,8 @@ void showReportLostScreen(int userIndex, std::string prefillName) {
 // HATI-HATI: searchResult menyimpan indeks asli; status boleh Dikembalikan
 // tetap muncul di laporan saya. SELESAI JIKA: [ ] M-ITEM-6 lulus. JANGAN ubah
 // nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-void showMyReportsScreen(int userIndex) {
+void showMyReportsScreen(int userIndex)
+{
   (void)userIndex; // hapus komentar ini setelah dipakai
 }
 
@@ -1438,8 +1584,9 @@ void showMyReportsScreen(int userIndex) {
 // HATI-HATI: nomor layar adalah indeks+1; jangan mempercayai nomor yang tidak ada dalam searchResult dan jangan cetak detail rahasia.
 // SELESAI JIKA: [ ] M-ITEM-5 dan M-CLAIM-1 sampai M-CLAIM-4 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-void showClaimFlowScreen(int userIndex) {
-    (void)userIndex; // hapus komentar ini setelah dipakai
+void showClaimFlowScreen(int userIndex)
+{
+  (void)userIndex; // hapus komentar ini setelah dipakai
 }
 
 // ============ [PEMILIK Muflih] main() ============
@@ -1457,44 +1604,61 @@ void showClaimFlowScreen(int userIndex) {
 // HATI-HATI: indeks 0 adalah login sukses; main tidak boleh berisi logika bisnis atau memakai cin/cout langsung.
 // SELESAI JIKA: [ ] M-UI-1 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
-int main() {
-  cout << "awokawok"<<endl;
-  cout << "Hai"<<endl;
-    loadAll();
-    if (userCount == 0) {
-        loadDemoData();
+int main()
+{
+  cout << "awokawok" << endl;
+  cout << "Hai" << endl;
+  loadAll();
+  if (userCount == 0)
+  {
+    loadDemoData();
+  }
+
+  bool isRunning = true;
+  while (isRunning)
+  {
+    printHeader("Lost and Found Management System");
+    int guestChoice = readInt("1. Register\n2. Login\n3. Keluar\nPilih: ", 1, 3);
+
+    if (guestChoice == 1)
+    {
+      showRegisterScreen();
     }
-
-    bool isRunning = true;
-    while (isRunning) {
-        printHeader("Lost and Found Management System");
-        int guestChoice = readInt("1. Register\n2. Login\n3. Keluar\nPilih: ", 1, 3);
-
-        if (guestChoice == 1) {
-            showRegisterScreen();
-        } else if (guestChoice == 2) {
-            int userIndex = showLoginScreen();
-            while (userIndex >= 0) {
-                printHeader("Menu Pengguna");
-                int userChoice = readInt("1. Lapor temuan\n2. Klaim barang\n3. Laporan saya\n4. Logout\nPilih: ", 1, 4);
-                if (userChoice == 1) {
-                    showReportFoundScreen(userIndex);
-                } else if (userChoice == 2) {
-                    showClaimFlowScreen(userIndex);
-                } else if (userChoice == 3) {
-                    showMyReportsScreen(userIndex);
-                } else {
-                    userIndex = -1;
-                }
-            }
-        } else {
-            isRunning = false;
+    else if (guestChoice == 2)
+    {
+      int userIndex = showLoginScreen();
+      while (userIndex >= 0)
+      {
+        printHeader("Menu Pengguna");
+        int userChoice = readInt("1. Lapor temuan\n2. Klaim barang\n3. Laporan saya\n4. Logout\nPilih: ", 1, 4);
+        if (userChoice == 1)
+        {
+          showReportFoundScreen(userIndex);
         }
+        else if (userChoice == 2)
+        {
+          showClaimFlowScreen(userIndex);
+        }
+        else if (userChoice == 3)
+        {
+          showMyReportsScreen(userIndex);
+        }
+        else
+        {
+          userIndex = -1;
+        }
+      }
     }
+    else
+    {
+      isRunning = false;
+    }
+  }
 
-    return 0;
+  return 0;
 }
 // hari ini sangat cerah, bahkan saya ingin segera memeluk awan dan hujan yang tersebar
 // harap hari-hari seperti ini selalu datang, dan nikmat yang aku dapatkan tidak berkurang sama sekali
 
-//testing123
+// testing123
+// fromat doc
