@@ -501,7 +501,7 @@ int toIndex(int displayNo) { return displayNo - 1; }
 
 /*
  * FILE:         src/ui/input_helpers.cpp
- * PEMILIK:      Mudhofar
+ * PEMILIK:      Mudhofar DONE
  * TUJUAN:       Membaca dan menampilkan input terminal yang dipakai semua layar
  * UI. BERGANTUNG:   utils/string_utils.cpp DIPAKAI OLEH: main.cpp dan seluruh
  * file ui URUTAN KERJA: readLine, readInt, printHeader, pauseScreen KONSEP YANG
@@ -541,13 +541,21 @@ std::string readLine(std::string prompt) {
 int readInt(std::string prompt, int minValue, int maxValue) {
   while (true) {
     std::string text = readLine(prompt);
+
+    // Memeriksa apakah input hanya terdiri dari angka
     if (!isAllDigits(text)) {
       cout << "Masukkan angka yang benar.\n";
-    } else {
+      continue;
+    }
+    
+    // Mengubah teks menjadi bilangan bulat
+    else {
       int result = 0;
       for (int i = 0; i < (int)text.length(); i++) {
         result = result * 10 + (text[i] - '0');
       }
+
+      // Memeriksa apakah angka berada dalam batas
       if (result >= minValue && result <= maxValue) {
         return result;
       }
@@ -1007,7 +1015,7 @@ int addLostReport(int reporterIndex, std::string name, std::string category,
     return ITEM_OK;
 }
 
-// PEMILIK TODO: Mudhofar
+// PEMILIK TODO: Mudhofar DONE
 // FUNGSI: searchAvailableItems   (flowchart: "Filter" -> "Loop temuan" ->
 // "searchResult") TUJUAN: mengisi hasil pencarian hanya dengan barang berstatus
 // Tersedia.
@@ -1027,11 +1035,43 @@ int addLostReport(int reporterIndex, std::string name, std::string category,
 // fungsi ini tanpa lapor semua pemilik modul.
 int searchAvailableItems(std::string keyword, std::string category,
                          std::string location) {
-  (void)keyword;  // hapus komentar ini setelah dipakai
-  (void)category; // hapus komentar ini setelah dipakai
-  (void)location; // hapus komentar ini setelah dipakai
-  searchResultCount = 0;
-  return 0;
+  
+   // Reset jumlah hasil pencarian 
+   searchResultCount = 0;
+
+   // Periksa seluruh data barang temuan
+   for (int i = 0; i < foundCount; i++) {
+
+    // lewati barang yang tidak tersedia
+    if (foundStatus[i] != STATUS_AVAILABLE) {
+      continue;
+    }
+
+    // Periksa keyword pada nama atau deskripsi barang
+    if (keyword != "" &&
+      !containsIgnoreCase(foundName[i], keyword) &&
+      !containsIgnoreCase(foundDescription[i], keyword)){
+        continue;
+      }
+
+    // Periksa kategori barang
+    if (category != "" &&
+      !containsIgnoreCase(foundCategory[i], category)) {
+        continue;
+      }
+
+    // Periksa lokasi barang
+    if (location != "" &&
+      !containsIgnoreCase(foundLocation[i], location)) {
+      continue;
+    }
+
+    // Simpan indeks asli barang ke hasil pencarian
+    searchResult[searchResultCount] = i;
+    searchResultCount++;
+   }
+
+  return searchResultCount;
 }
 
 // PEMILIK TODO: Muflih
@@ -1052,7 +1092,7 @@ int listItemsByReporter(int reporterIndex) {
   return 0;
 }
 
-// ============ [PEMILIK Mudhofar] claims ============
+// ============ [PEMILIK Mudhofar] claims DONE ============
 
 /*
  * FILE:         src/claims/claims.cpp
@@ -1076,13 +1116,20 @@ int listItemsByReporter(int reporterIndex) {
 // HATI-HATI: pasangan item sama tetapi user berbeda harus memiliki hitungan
 // terpisah. SELESAI JIKA: [ ] M-CLAIM-1 lulus. JANGAN ubah nama, parameter,
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
+
+// Mengambil jumlah jawaban klaim salah untuk pasanagan item dan pengguna
 int getFailedClaimCount(int itemIndex, int userIndex) {
-  (void)itemIndex; // hapus komentar ini setelah dipakai
-  (void)userIndex; // hapus komentar ini setelah dipakai
+    for (int i = 0; i < claimCount; i++) {
+      if (claimItem[i] == itemIndex &&
+          claimUser[i] == userIndex) {
+          return claimFailed[i];
+      }
+    }
+
   return 0;
 }
 
-// PEMILIK TODO: Mudhofar
+// PEMILIK TODO: Mudhofar DONE
 // FUNGSI: getFinderContact   (flowchart: "Item" -> "Reporter" -> "Kontak")
 // TUJUAN: membuat teks "username - nomor telepon" milik penemu barang.
 // TODO:
@@ -1092,9 +1139,12 @@ int getFailedClaimCount(int itemIndex, int userIndex) {
 // HATI-HATI: fungsi ini hanya dipanggil UI setelah CLAIM_APPROVED dan itemIndex
 // sudah valid. SELESAI JIKA: [ ] M-CLAIM-3 lulus. JANGAN ubah nama, parameter,
 // atau tipe return fungsi ini tanpa lapor semua pemilik modul.
+
+// Mengambil username dan nomor telepon penemu barang
 std::string getFinderContact(int itemIndex) {
-  (void)itemIndex; // hapus komentar ini setelah dipakai
-  return "";
+    int reporterIndex = foundReporter[itemIndex];
+
+  return userName[reporterIndex] + " - " + userPhone[reporterIndex];
 }
 
 // PEMILIK TODO: Mudhofar
@@ -1120,11 +1170,62 @@ std::string getFinderContact(int itemIndex) {
 // SELESAI JIKA: [ ] M-CLAIM-1, M-CLAIM-2, M-CLAIM-3, dan M-CLAIM-4 lulus.
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua
 // pemilik modul.
+
+// Memproses percobaan klaim barang
 int submitClaim(int claimantIndex, int itemIndex, std::string secretAnswer) {
-  (void)claimantIndex; // hapus komentar ini setelah dipakai
-  (void)itemIndex;     // hapus komentar ini setelah dipakai
-  (void)secretAnswer;  // hapus komentar ini setelah dipakai
-  return CLAIM_ITEM_NOT_FOUND;
+  
+  // Periksa apakah indeks barang falid
+  if (itemIndex < 0 || itemIndex >= foundCount) {
+    return CLAIM_ITEM_NOT_FOUND;
+  }
+
+  // Periksa apakah barang masih tersedia
+  if (foundStatus[itemIndex] != STATUS_AVAILABLE){
+    return CLAIM_NOT_AVAILABLE;
+  }
+
+  // Pengguna tidak boleh mengklaim barang temuannya sendiri
+  if (foundReporter[itemIndex] == claimantIndex) {
+    return CLAIM_OWN_ITEM;
+  }
+
+  // Periksa batas percobaan klaim
+  if (getFailedClaimCount(itemIndex, claimantIndex) >= MAX_CLAIM_ATTEMPTS){
+    return CLAIM_TOO_MANY_ATTEMPTS;
+  }
+
+  // Bandingkan jawaban dengan detail rahasia
+  if (toLower(trim(secretAnswer)) == 
+      toLower(trim(foundSecret[itemIndex]))){
+
+        foundStatus[itemIndex] = "Dikembalikan";
+
+        return CLAIM_APPROVED;
+      }
+
+  // Jika jawaban salah, cari data percobaan klaim sebelumnya
+  for (int i = 0; i < claimCount; i++) {
+    if (claimItem[i] == itemIndex &&
+    claimUser[i] == claimantIndex) {
+
+      claimFailed[i]++;
+      return CLAIM_WRONG_DETAIL;
+    }
+  }
+
+  // Jika belum ada data klaim dan penyimpana penuh
+  if (claimCount >= MAX_CLAIMS) {
+    return CLAIM_STORAGE_FULL;
+  }
+
+  // Buat data percobaan klaim baru
+  claimItem[claimCount] = itemIndex;
+  claimUser[claimCount] = claimantIndex;
+  claimFailed[claimCount] = 1;
+
+  claimCount++;
+
+  return CLAIM_WRONG_DETAIL;
 }
 
 // ============ [PEMILIK Muflih] auth_screen ============
