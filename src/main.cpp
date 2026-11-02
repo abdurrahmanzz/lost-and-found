@@ -13,6 +13,7 @@
 #include <cctype>
 #include <fstream>
 #include <ctime>
+#include <climits>
 
 using namespace std;
 
@@ -593,9 +594,28 @@ int readInt(std::string prompt, int minValue, int maxValue)
     else
     {
       int result = 0;
+      bool overflow = false;
+
       for (int i = 0; i < (int)text.length(); i++)
       {
-        result = result * 10 + (text[i] - '0');
+        int digit = text[i] - '0';
+
+        // Cek batas integer sebelum perkalian dan penjumlahan
+        if (result > (INT_MAX - digit) / 10) 
+        {
+          overflow = true;
+          break;
+        }
+
+        result = result  * 10 + digit;
+
+      }
+
+      // Memeriksa apakah terjadi integer overflow
+      if (overflow)
+      {
+        cout << "Angka terlalu besar. Silahkan masukkan angka kembali.\n";
+        continue;
       }
 
       // Memeriksa apakah angka berada dalam batas
@@ -1253,7 +1273,7 @@ std::string getFinderContact(int itemIndex)
   return userName[reporterIndex] + " - " + userPhone[reporterIndex];
 }
 
-// PEMILIK TODO: Mudhofar
+// PEMILIK TODO: Mudhofar DONE
 // FUNGSI: submitClaim   (flowchart: "Pilih item" -> "Boleh klaim?" -> "Detail
 // benar?") TUJUAN: menyetujui klaim benar atau mencatat jawaban salah untuk
 // satu item dan pengguna.
@@ -1310,7 +1330,7 @@ int submitClaim(int claimantIndex, int itemIndex, std::string secretAnswer)
       toLower(trim(foundSecret[itemIndex])))
   {
 
-    foundStatus[itemIndex] = "Dikembalikan";
+    foundStatus[itemIndex] = STATUS_RETURNED;
 
     return CLAIM_APPROVED;
   }
@@ -1570,7 +1590,7 @@ void showMyReportsScreen(int userIndex)
  * KONSEP YANG DIPERLUKAN: string, int, if/else, for, fungsi
  */
 
-// PEMILIK TODO: Mudhofar
+// PEMILIK TODO: Mudhofar DONE
 // FUNGSI: showClaimFlowScreen   (flowchart: "Cari" -> "Pilih" -> "Jawab detail" -> "Klaim")
 // TUJUAN: mengarahkan pengguna dari pencarian barang sampai hasil klaim.
 // TODO:
@@ -1586,7 +1606,123 @@ void showMyReportsScreen(int userIndex)
 // JANGAN ubah nama, parameter, atau tipe return fungsi ini tanpa lapor semua pemilik modul.
 void showClaimFlowScreen(int userIndex)
 {
-  (void)userIndex; // hapus komentar ini setelah dipakai
+  printHeader("Cari dan Klaim Barang");
+
+  // Ambil filter pencarian dari pengguna
+  std::string keyword = readLine("Nama atau deskripsi barang: ");
+  std::string category = readLine("Kategori barang: ");
+  std::string location = readLine("Lokasi ditemukan: ");
+
+  // Cari barang yang masih tersedia
+  int resultCount = searchAvailableItems(keyword, category, location);
+
+  // Jika tidak ada barang yang ditemukan
+  if (resultCount == 0) {
+    std::cout << "\nBarang tidak ditemukan\n";
+    int choice = readInt(
+      "Apakah anda ingin membuat laporan barang hilang?\n"
+      "1. Ya\n"
+      "2. Tidak\n"
+      "Pilih: ", 1, 2
+    );
+
+    if (choice == 1) {
+      showReportLostScreen(userIndex, keyword);
+    }
+
+    return;
+  }
+
+  // Tampilkan daftar barang yang tersedia
+  std::cout << "\n=== Daftar Barang Ditemukan ===\n";
+
+  int maxDisplayNo = 0;
+
+  for (int i = 0; i < searchResultCount; i++) {
+    int index = searchResult[i];
+    int displayNo = toDisplayNo(index);
+
+    std::cout << "\nNomor    : " << displayNo << "\n";
+    std::cout << "Nama       : " << foundName[index] << "\n";
+    std::cout << "Kategori   : " << foundCategory[index] << "\n";
+    std::cout << "Lokasi     : " << foundLocation[index] << "\n";
+    std::cout << "Tanggal    : " << foundDate[index] << "\n";
+    std::cout << "Deskripsi  : " << foundDescription[index] << "\n";
+    
+    if (displayNo > maxDisplayNo) {
+      maxDisplayNo = displayNo;
+    }
+  }
+
+  // Minta nomor barang yang ingin diklaim 
+  int displayNo = readInt(
+    "\nMasukkan nomor barang yang ingin diklaim: ", 1,
+    maxDisplayNo
+  );
+
+  int itemIndex = toIndex(displayNo);
+
+  // Pastikan nomor yang dipilih benar-benar ada dalam hasil pencarian
+  bool isFound = false;
+
+  for (int i = 0; i < searchResultCount; i++){
+    if (searchResult[i] == itemIndex) {
+      isFound = true;
+      break;
+    }
+  }
+
+  if (!isFound) {
+    std::cout << "\nNomor barang tidak tersedia dalam hasil pencarian.\n";
+    pauseScreen();
+    return;
+  }
+
+  // Ambil jawaban detail rahasia dan proses klaim
+  std::string secretAnswer = readLine(
+    "Masukkan detail khusus untuk membuktikan kepemilikan: "
+  );
+
+  int claimResult = submitClaim(userIndex, itemIndex, secretAnswer);
+
+  // tampilkan pesan berdasarkan hasil klaim
+  if (claimResult == CLAIM_APPROVED) {
+    std::cout << "\nKlaim berhasil disetujui!\n";
+    std::cout << "Silahkan hubungi penemu barang:\n";
+    std::cout << getFinderContact(itemIndex) << "\n";
+
+    // Simpan perubahan status barang
+    saveAll();
+
+  } else if (claimResult == CLAIM_WRONG_DETAIL) {
+    std::cout << "\nDetail yang kamu masukkan salah.\n";
+    std::cout << "Silahkan periksa kembali informasi barang.\n";
+
+    //simpan penambahan jumlah percobaan salah
+    saveAll();
+
+  } else if (claimResult == CLAIM_TOO_MANY_ATTEMPTS) {
+    std::cout << "\nKamu sudah mencapai batas percobaan klaim.\n";
+
+  } else if (claimResult == CLAIM_ITEM_NOT_FOUND) {
+    std::cout << "\nBarang tidak ditemukan.\n";
+
+  } else if (claimResult == CLAIM_NOT_AVAILABLE) {
+    std::cout << "\nBarang sudah tidak tersedia untuk diklaim.\n";
+
+  } else if (claimResult == CLAIM_OWN_ITEM) {
+    std::cout << "\nKamu tidak dapat mengklaim barang temuanmu sendiri.\n";
+
+  } else if (claimResult == CLAIM_STORAGE_FULL) {
+    std::cout << "\nPenyimpanan data percobaan klaim sudah penuh.\n";
+
+  } else {
+    std::cout << "\nTerjadi kesalahan yang tidak diketahui.\n";
+
+  }
+
+  // kembali setelah pengguna membaca hasil klaim
+  pauseScreen();
 }
 
 // ============ [PEMILIK Muflih] main() ============
