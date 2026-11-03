@@ -3,3 +3,5 @@ data/*.txt
 *.exe
 *.o
 lostfound
+frontend
+*.out
